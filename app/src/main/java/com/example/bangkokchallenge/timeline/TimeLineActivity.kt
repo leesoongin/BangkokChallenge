@@ -18,8 +18,8 @@ class TimeLineActivity : AppCompatActivity() {
         setContentView(R.layout.activity_time_line)
         val uriPath=SharedPreferenceStorage.USER_PROFILEIMAGE_PATH
 
-        user_nicname.text=SharedPreferenceStorage.USER_ID
+      /*  //user_nicname.text=SharedPreferenceStorage.USER_ID
 
-        Glide.with(this@TimeLineActivity).load(uriPath).into(user_profile_imageview)
+        Glide.with(this@TimeLineActivity).load(uriPath).into(user_profile_imageview)*/
     }
 }

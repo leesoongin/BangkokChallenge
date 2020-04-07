@@ -3,4 +3,12 @@
 
     <!--카카오 네이티브 앱 키-->
     <string name="kakao_native_app_key">a93dc68eeb980c6938f45579465967b9</string>
+
+    <!--Bottom Navigation Item-->
+    <string name="home">Home</string>
+    <string name="mypage">MyPage</string>
+    <string name="create_post">Post</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
