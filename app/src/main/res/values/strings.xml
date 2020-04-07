@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BangkokChallenge</string>
+
+    <!--카카오 네이티브 앱 키-->
+    <string name="kakao_native_app_key">a93dc68eeb980c6938f45579465967b9</string>
 </resources>

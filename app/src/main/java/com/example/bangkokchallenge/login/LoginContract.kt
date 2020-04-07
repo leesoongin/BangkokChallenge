@@ -9,7 +9,8 @@ import com.example.bangkokchallenge.base.BaseView
 
 interface LoginContract {
     interface View : BaseView<Presenter>{
-        fun changeLoginState(boolean: Boolean)
+        fun login()
+        fun logout()
     }
 
     interface Presenter : BasePresenter{

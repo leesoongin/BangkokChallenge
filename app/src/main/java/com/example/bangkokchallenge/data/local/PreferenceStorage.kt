@@ -13,6 +13,7 @@ import kotlin.reflect.KProperty
 
 interface PreferenceStorage{
     var userId : String?
+    var userProfileImagePath:String?
     var userToken : String?
 }
 
@@ -20,23 +21,38 @@ interface PreferenceStorage{
 class SharedPreferenceStorage  constructor(context: Context) : PreferenceStorage {
 
     private val prefs: Lazy<SharedPreferences> = lazy {
-        context.applicationContext.getSharedPreferences(
-            PREFS_NAME, Context.MODE_PRIVATE
-        )
+        context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
     companion object {
         const val PREFS_NAME = "app_prefs_name"
-        const val USER_ID = "user_id"
+        var USER_ID = "user_id"
+        var USER_PROFILEIMAGE_PATH="user_profileimage_path"
         const val USER_TOKEN = "user_token"
     }
 
     override var userId by StringPreference(prefs, USER_ID, null)
+    override var userProfileImagePath by StringPreference(prefs, USER_PROFILEIMAGE_PATH,null)
     override var userToken by StringPreference(prefs, USER_TOKEN, null)
 
 }
 
 
+class StringPreference(
+    private val preferences: Lazy<SharedPreferences>,
+    private val name: String,
+    private val defaultValue: String?
+) : ReadWriteProperty<Any, String?> {
+
+    @WorkerThread
+    override fun getValue(thisRef: Any, property: KProperty<*>): String? {
+        return preferences.value.getString(name, defaultValue)
+    }
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) {
+        preferences.value.edit { putString(name, value) }
+    }
+}
 
 
 class BooleanPreference(
@@ -52,21 +68,5 @@ class BooleanPreference(
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: Boolean) {
         preferences.value.edit { putBoolean(name, value) }
-    }
-}
-
-class StringPreference(
-    private val preferences: Lazy<SharedPreferences>,
-    private val name: String,
-    private val defaultValue: String?
-) : ReadWriteProperty<Any, String?> {
-
-    @WorkerThread
-    override fun getValue(thisRef: Any, property: KProperty<*>): String? {
-        return preferences.value.getString(name, defaultValue)
-    }
-
-    override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) {
-        preferences.value.edit { putString(name, value) }
     }
 }
