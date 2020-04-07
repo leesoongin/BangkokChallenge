@@ -66,9 +66,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        sharedPreferences=this.getSharedPreferences("user_info",0)
-        editor=sharedPreferences.edit()
-        prefs=SharedPreferenceStorage(this@LoginActivity)
+
 
         initViewBinding()
 
