@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".createpost.CreatePostActivity" />
         <activity android:name=".mypage.MyPageActivity" />
-        <activity android:name=".base.BaseView" /> <!-- 카카오 로그인 시 웹 뷰를 띄우기 위한 코드 -->
+        <!-- 카카오 로그인 시 웹 뷰를 띄우기 위한 코드 -->
         <activity
             android:name="com.kakao.auth.authorization.authcode.KakaoWebViewActivity"
             android:launchMode="singleTop"

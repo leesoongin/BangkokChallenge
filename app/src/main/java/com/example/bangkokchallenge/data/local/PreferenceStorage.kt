@@ -24,10 +24,10 @@ class SharedPreferenceStorage  constructor(context: Context) : PreferenceStorage
         context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    companion object {
+    companion object { //key값
         const val PREFS_NAME = "app_prefs_name"
-        var USER_ID = "user_id"
-        var USER_PROFILEIMAGE_PATH="user_profileimage_path"
+        const val USER_ID = "user_id"
+        const val USER_PROFILEIMAGE_PATH="user_profileimage_path"
         const val USER_TOKEN = "user_token"
     }
 

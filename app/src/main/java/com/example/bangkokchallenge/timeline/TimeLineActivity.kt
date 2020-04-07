@@ -1,6 +1,7 @@
 package com.example.bangkokchallenge.timeline
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +14,11 @@ import java.net.URI
 
 class TimeLineActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_line)
-        val uriPath=SharedPreferenceStorage.USER_PROFILEIMAGE_PATH
 
-      /*  //user_nicname.text=SharedPreferenceStorage.USER_ID
-
-        Glide.with(this@TimeLineActivity).load(uriPath).into(user_profile_imageview)*/
+        /*Glide.with(this@TimeLineActivity).load(uriPath).into(user_profile_imageview)*/
     }
 }

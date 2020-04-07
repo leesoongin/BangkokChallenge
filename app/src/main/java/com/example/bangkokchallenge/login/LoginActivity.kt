@@ -2,6 +2,7 @@ package com.example.bangkokchallenge.login
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -44,16 +45,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                 override fun onSuccess(result: MeV2Response) {
                     val userSessionToken = Session.getCurrentSession().tokenInfo.accessToken
 
-                    Log.d("유저정보","이름: "+result.nickname) // 내이름
-                    Log.d("유저정보","프사 경로: "+result.thumbnailImagePath) // 내 프사 썸네일규격이미지
-                    Log.d("유저정보","connectedAt: "+result.connectedAt) //접속시간?
-                    Log.d("유저정보","kakaoAccount: "+result.kakaoAccount) //계정정보
-                    Log.d("유저정보","id: "+result.id) //내 고유 아이디
-                    Log.d("유저정 보","properties: "+result.properties) //프로필이미지 닉네임 규격이미지 들어가있네?
-
-                    SharedPreferenceStorage.USER_ID=result.nickname
-                    SharedPreferenceStorage.USER_PROFILEIMAGE_PATH=result.thumbnailImagePath
-
+                    /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
+                    startActivity(Intent(applicationContext,TimeLineActivity::class.java))
                     if (BuildConfig.DEBUG) {
                         //toastMessage("[DEV] onSuccess() user token: $userSessionToken")
                     }
@@ -62,18 +55,20 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                     // todo : 세션 응답 실패 처리
                 }//closed
             })
-            /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
-            startActivity(Intent(applicationContext,TimeLineActivity::class.java))
-        }
+        }//onSessionOpened
 
         override fun onSessionOpenFailed(exception: KakaoException) {
             Log.e("KAKAO_SESSION", "로그인 실패", exception)
         }
-    }
+    }//callback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        sharedPreferences=this.getSharedPreferences("user_info",0)
+        editor=sharedPreferences.edit()
+        prefs=SharedPreferenceStorage(this@LoginActivity)
 
         initViewBinding()
 
@@ -95,6 +90,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
         /*카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달*/
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+
             return
         }
         super.onActivityResult(requestCode, resultCode, data)
