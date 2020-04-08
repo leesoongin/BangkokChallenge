@@ -44,8 +44,9 @@ dependencies {
     implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.27.0' // 카카오톡
     implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.27.0' // 카카오링크
     implementation 'com.github.bumptech.glide:glide:4.9.0' // 이미지 internet에서 가지고오는 라이브러리
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0' //마찬가지
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "com.google.android.material:material:$material_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -54,5 +55,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
+
+    //coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
 }
