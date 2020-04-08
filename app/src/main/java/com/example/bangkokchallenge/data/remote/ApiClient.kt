@@ -8,18 +8,18 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 class ApiClient {
-    companion object{
+    companion object {
         const val BASE_URL = "" // 서버 Url
         private var retrofit: Retrofit? = null
-    }
 
-    fun getClient(): Retrofit? {
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+        fun getClient(): Retrofit {
+            if (retrofit == null) {
+                retrofit = Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+            }
+            return retrofit!!
         }
-        return retrofit
     }
 }
