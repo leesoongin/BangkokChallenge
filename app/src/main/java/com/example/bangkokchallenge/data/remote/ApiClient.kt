@@ -12,7 +12,6 @@ class ApiClient {
         const val BASE_URL = "" // 서버 Url
         private var retrofit: Retrofit? = null
 
-
         fun getClient(): Retrofit {
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()

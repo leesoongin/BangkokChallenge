@@ -12,7 +12,6 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-
     @GET("timeline")
     fun getTimeLineItems(
         @Header("Authorization") token: String,
