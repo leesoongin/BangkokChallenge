@@ -2,7 +2,6 @@ package com.example.bangkokchallenge.login
 
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,9 +9,7 @@ import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkokchallenge.BuildConfig
 import com.example.bangkokchallenge.R
-import com.example.bangkokchallenge.data.local.PreferenceStorage
-import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
-import com.example.bangkokchallenge.timeline.TimeLineActivity
+import com.example.bangkokchallenge.main.MainActivity
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -44,9 +41,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             UserManagement.getInstance().me(object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response) {
                     val userSessionToken = Session.getCurrentSession().tokenInfo.accessToken
-
                     /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
-                    startActivity(Intent(applicationContext,TimeLineActivity::class.java))
+                    startActivity(Intent(applicationContext,
+                        MainActivity::class.java))
                     if (BuildConfig.DEBUG) {
                         //toastMessage("[DEV] onSuccess() user token: $userSessionToken")
                     }
