@@ -66,8 +66,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-
-
         initViewBinding()
 
         presenter = LoginPresenter(this)

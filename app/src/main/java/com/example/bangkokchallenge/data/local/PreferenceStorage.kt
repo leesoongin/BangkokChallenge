@@ -34,7 +34,6 @@ class SharedPreferenceStorage  constructor(context: Context) : PreferenceStorage
     override var userId by StringPreference(prefs, USER_ID, null)
     override var userProfileImagePath by StringPreference(prefs, USER_PROFILEIMAGE_PATH,null)
     override var userToken by StringPreference(prefs, USER_TOKEN, null)
-
 }
 
 
