@@ -1,10 +1,12 @@
 package com.example.bangkokchallenge.main
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkokchallenge.R
+import com.example.bangkokchallenge.createpost.CreatePostActivity
 import com.example.bangkokchallenge.mypage.MypageViewFragment
 import com.example.bangkokchallenge.timeline.TimelineFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
                 return true
             }
             R.id.action_create_post -> { //user
-
+                startActivity(Intent(applicationContext,CreatePostActivity::class.java)) // 임시 .    /  화면전환
                 return true
             }//when
         }
