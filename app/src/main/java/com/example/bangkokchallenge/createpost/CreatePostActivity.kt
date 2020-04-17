@@ -30,7 +30,6 @@ class CreatePostActivity : AppCompatActivity() {
     }
 
     private fun setNormalMultiButton() {
-        binding.btnNormalMulti.setOnClickListener {
             TedImagePicker.with(this)
                 //.mediaType(MediaType.IMAGE)
                 //.scrollIndicatorDateFormat("YYYYMMDD")
@@ -40,7 +39,6 @@ class CreatePostActivity : AppCompatActivity() {
                 .errorListener { message -> Log.d("ted", "message: $message") }
                 .selectedUri(selectedUriList)
                 .startMultiImage { list: List<Uri> -> showMultiImage(list) }
-        }
     }
 
     private fun showMultiImage(uriList: List<Uri>) {
