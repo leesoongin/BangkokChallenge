@@ -1,8 +1,13 @@
 package com.example.bangkokchallenge.login
 
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.widget.Button
 import androidx.annotation.Nullable
@@ -20,6 +25,9 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.callback.UnLinkResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
+import com.kakao.util.helper.Utility.getPackageInfo
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 /**
@@ -64,6 +72,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(R.layout.activity_login)
 
         initViewBinding()
+
+       // Log.d("@@kakao","${getHashKey(this)}") 키 해시값 구하기
 
         presenter = LoginPresenter(this)
 
@@ -136,7 +146,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             })
     }
 
-    /*fun getHashKey(context: Context): String? { // 키 해시값 출력 코드
+    fun getHashKey(context: Context): String? { // 키 해시값 출력 코드
        try {
            if (Build.VERSION.SDK_INT >= 28) {
                val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
@@ -167,5 +177,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
        }
 
        return null
-   }*/
+   }
 }
