@@ -8,7 +8,11 @@ class CreatePostPresenter(
     private val createPostView: CreatePostContract.View
 ) : CreatePostContract.Presenter {
 
-    override fun start() {
+    override fun requestPosting() {
+        createPostView.posting()
+    }
 
+    override fun start() {
+        //Todo : 준영이형 보고싶다
     }
 }

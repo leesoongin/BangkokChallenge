@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         initViewBinding()
 
-       // Log.d("@@kakao","${getHashKey(this)}") 키 해시값 구하기
+       // Log.d("@@kakao","${getHashKey(this)}")
 
         presenter = LoginPresenter(this)
 
