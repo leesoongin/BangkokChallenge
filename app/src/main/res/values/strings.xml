@@ -8,6 +8,7 @@
     <string name="home">Home</string>
     <string name="mypage">MyPage</string>
     <string name="create_post">Post</string>
+    <string name="like_post">Like</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

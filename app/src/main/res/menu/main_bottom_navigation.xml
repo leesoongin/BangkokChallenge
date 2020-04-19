@@ -13,9 +13,17 @@
         android:title="@string/mypage">
     </item>
     <item
+        android:id="@+id/action_like_post"
+        android:icon="@drawable/like"
+        android:enabled="true"
+        android:title="@string/like_post">
+    </item>
+
+    <item
         android:id="@+id/action_create_post"
         android:icon="@drawable/create_post"
         android:enabled="true"
         android:title="@string/create_post">
     </item>
+
 </menu>
