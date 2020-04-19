@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.createpost.CreatePostActivity
+import com.example.bangkokchallenge.likepost.LikePostFragment
 import com.example.bangkokchallenge.mypage.MypageViewFragment
 import com.example.bangkokchallenge.timeline.TimelineFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
                 startActivity(Intent(applicationContext,CreatePostActivity::class.java)) // 임시 .    /  화면전환
                 return true
             }//when
+            R.id.action_like_post->{
+                var likePostFragment =LikePostFragment()
+
+                supportFragmentManager.beginTransaction().replace(R.id.main_framelayout,likePostFragment).commit()
+                return true
+            }
         }
         return false  //아무것도 걸리지 않았다면 false return
     }

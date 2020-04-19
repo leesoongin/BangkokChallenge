@@ -42,6 +42,7 @@
         app:itemIconTint="@color/colorNavIcon"
         app:itemTextColor="@color/colorNavIcon"
         app:menu="@menu/main_bottom_navigation"
+        app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
