@@ -15,22 +15,48 @@ import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.databinding.ActivityCreatePostBinding
 import com.example.bangkokchallenge.databinding.ItemImageBinding
 import gun0912.tedimagepicker.builder.TedImagePicker
+import kotlinx.android.synthetic.main.activity_create_post.*
 
-class CreatePostActivity : AppCompatActivity() {
+class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
 
     /* 데이터 바인딩 .. ? */
     private lateinit var binding: ActivityCreatePostBinding
     private var selectedUriList: List<Uri>? = null
 
+    /* View */
+    private var post_discription_text:String?=null
+    private var post_hashTag_text:String?=null
+
+
+    override lateinit var presenter: CreatePostContract.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post)
 
-        setNormalMultiButton()
+        presenter=CreatePostPresenter(this@CreatePostActivity) //presenter 설정
+
+        initView()
+
+        /* 이미지 불러오기 , 게시하기 */
+        loadImage()
     }
 
-    private fun setNormalMultiButton() {
-        binding.btnNormalMulti.setOnClickListener {
+    override fun posting(){
+        finish() //Todo :  설명, 해시태그, 사진 서버로 전송
+    }
+
+    private fun initView(){
+        /* 설명, 해시태그, 게시하기*/
+        post_discription_text=post_discription.text.toString()
+        post_hashTag_text=post_hash_tag.text.toString()
+
+        posting_btn.setOnClickListener {
+            presenter.requestPosting()
+        }
+    }
+
+    private fun loadImage() {
             TedImagePicker.with(this)
                 //.mediaType(MediaType.IMAGE)
                 //.scrollIndicatorDateFormat("YYYYMMDD")
@@ -40,7 +66,6 @@ class CreatePostActivity : AppCompatActivity() {
                 .errorListener { message -> Log.d("ted", "message: $message") }
                 .selectedUri(selectedUriList)
                 .startMultiImage { list: List<Uri> -> showMultiImage(list) }
-        }
     }
 
     private fun showMultiImage(uriList: List<Uri>) {

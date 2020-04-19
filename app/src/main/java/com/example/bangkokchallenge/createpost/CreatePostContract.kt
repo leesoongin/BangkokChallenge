@@ -10,10 +10,10 @@ import com.example.bangkokchallenge.base.BaseView
 interface CreatePostContract {
 
     interface View : BaseView<Presenter> {
-
+        fun posting()
     }
 
     interface Presenter : BasePresenter {
-
+        fun requestPosting()
     }
 }
