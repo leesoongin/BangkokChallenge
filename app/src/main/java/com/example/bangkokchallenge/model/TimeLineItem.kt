@@ -10,7 +10,7 @@ data class TimeLineItem( //임시 모델.
     var id : String?,
     var userName : String?,
     var imageUrl : String?, //or List<String>
-    var description : String?,
+    var discription : String?,
     var dataTime : String?,
     var likeCount : Int?,
     var commentCount: Int?
