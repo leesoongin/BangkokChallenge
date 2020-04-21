@@ -61,7 +61,7 @@
         tools:text="댓글 2개"/>
     
     <TextView
-        android:id="@+id/item_time_line_description"
+        android:id="@+id/item_time_line_discription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/item_time_line_likecount"
@@ -80,7 +80,7 @@
         android:id="@+id/item_time_line_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_description"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_discription"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
