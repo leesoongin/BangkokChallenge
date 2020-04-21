@@ -33,7 +33,7 @@ import com.example.bangkokchallenge.model.TimeLineItem
         holder.apply {
             userName.text = dataList[position].userName
             description.text = dataList[position].discription
-            date.text = dataList[position].dataTime
+            date.text = dataList[position].dateTime
             likeCount.text = "좋아요 ${dataList[position].likeCount}개"
             commentCount.text = "댓글 ${dataList[position].commentCount}개"
 
@@ -44,7 +44,7 @@ import com.example.bangkokchallenge.model.TimeLineItem
     class TimeLineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
-        var description: TextView = itemView.findViewById(R.id.item_time_line_description)
+        var description: TextView = itemView.findViewById(R.id.item_time_line_discription)
         var likeCount: TextView = itemView.findViewById(R.id.item_time_line_likecount)
         var commentCount: TextView = itemView.findViewById(R.id.item_time_line_commentcount)
         var date: TextView = itemView.findViewById(R.id.item_time_line_date)

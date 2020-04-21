@@ -11,7 +11,7 @@ data class TimeLineItem( //임시 모델.
     var userName : String?,
     var imageUrl : String?, //or List<String>
     var discription : String?,
-    var dataTime : String?,
+    var dateTime : String?,
     var likeCount : Int?,
     var commentCount: Int?
 )
