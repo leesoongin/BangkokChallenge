@@ -1,8 +1,10 @@
 package com.example.bangkokchallenge.timeline
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangkokchallenge.R
@@ -37,17 +39,30 @@ import com.example.bangkokchallenge.model.TimeLineItem
             likeCount.text = "좋아요 ${dataList[position].likeCount}개"
             commentCount.text = "댓글 ${dataList[position].commentCount}개"
 
-        }
+            likeImage.setOnClickListener {
+                Log.d("이벤트리스너","like")
+            }
+            commentImage.setOnClickListener {
+                Log.d("이벤트리스너","comment")
+            }
+            moreImage.setOnClickListener {
+                Log.d("이벤트리스너","more")
+            }
+        }//apply
+
     }
 
 
     class TimeLineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
         var description: TextView = itemView.findViewById(R.id.item_time_line_discription)
         var likeCount: TextView = itemView.findViewById(R.id.item_time_line_likecount)
         var commentCount: TextView = itemView.findViewById(R.id.item_time_line_commentcount)
         var date: TextView = itemView.findViewById(R.id.item_time_line_date)
 
+        /* item */
+        var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)
+        var commentImage:ImageView=itemView.findViewById(R.id.item_time_line_comment_image)
+        var moreImage:ImageView=itemView.findViewById(R.id.item_time_line_more_image)
     }
 }
