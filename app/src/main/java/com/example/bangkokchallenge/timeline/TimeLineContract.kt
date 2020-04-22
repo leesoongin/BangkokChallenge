@@ -11,10 +11,6 @@ import com.example.bangkokchallenge.model.TimeLineItem
 
 interface TimeLineContract {
     interface View : BaseView<Presenter> {
-        /* like, comment, more event listener 이미지까지만 바꿔주고*/
-        fun setLikeData()
-        fun moveCommentPage()
-        // more <- 수정, 삭제 바텀시트로 하자
         fun setRecyclerViewData(responseData : List<TimeLineItem>)
         fun onResponseFailure(t: Throwable?)
     }
