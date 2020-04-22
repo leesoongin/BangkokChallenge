@@ -20,6 +20,7 @@ interface TimeLineContract {
 
     }
 
+
     interface TimeLineInteractor{
         /*like , comment get data*/
         fun getTimeLineData(onFinishedListener: OnFinishedListener)
