@@ -11,12 +11,15 @@ import retrofit2.http.Query
  */
 
 interface ApiService {
+//
+//    @GET("timeline")
+//    fun getTimeLineItems(
+//        @Header("Authorization") token: String,
+//        @Query("offset") offset: Int,
+//        @Query("limit") limit: Int
+//    ): Call<List<TimeLineItem>>
 
-    @GET("timeline")
-    fun getTimeLineItems(
-        @Header("Authorization") token: String,
-        @Query("offset") offset: Int,
-        @Query("limit") limit: Int
-    ): Call<List<TimeLineItem>>
 
+    @GET("post/list")
+    fun getTimeLineItems(): Call<List<TimeLineItem>>
 }

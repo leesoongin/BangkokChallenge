@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
     companion object {
-        const val BASE_URL = "" // 서버 Url
+        const val BASE_URL = "http://192.168.0.9:8080" // 서버 Url
         private var retrofit: Retrofit? = null
 
         fun getClient(): Retrofit {
