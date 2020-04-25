@@ -13,5 +13,19 @@ data class TimeLineItem( //임시 모델.
     var discription : String?,
     var dateTime : String?,
     var likeCount : Int?,
+    var selfLike : Boolean,
     var commentCount: Int?
 )
+/*
+ String id;
+    @Id
+    Integer post_Index;
+    String article;
+    String hasgTag[];
+    String file;
+    Integer likeNum;
+    boolean selfLike;
+    Integer commentNum;
+    String filePath;
+    Integer fileNum;
+ */

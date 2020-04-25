@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
 import com.example.bangkokchallenge.model.TimeLineItem
+import java.sql.Time
 import kotlin.coroutines.coroutineContext
 
 
@@ -21,10 +22,19 @@ import kotlin.coroutines.coroutineContext
  */
 
  class TimeLineAdapter(
-    private val dataList : List<TimeLineItem>
-//    private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
-) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>() {
+    private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
+) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
+    private lateinit var dataList : List<TimeLineItem>
+
+    fun setDataList(dataList : List<TimeLineItem>){
+        this@TimeLineAdapter.dataList = dataList
+    }
+
+    fun modifyLikeData(position: Int, boolean: Boolean){
+        dataList[position].selfLike = boolean
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -44,11 +54,18 @@ import kotlin.coroutines.coroutineContext
             likeCount.text = "좋아요 ${dataList[position].likeCount}개"
             commentCount.text = "댓글 ${dataList[position].commentCount}개"
 
+            if(dataList[position].selfLike){
+                likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
+            }else{
+                likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like))
+            }
+
             likeImage.setOnClickListener {
-                Log.d("이벤트리스너","like")
+                listener.onClickLike(position)
             }
             commentImage.setOnClickListener {
-               //
+                //discription 을 가지고가자
+                listener.onClickComment(discription.text.toString())
             }
             moreImage.setOnClickListener {
                 Log.d("이벤트리스너","more")
@@ -56,7 +73,6 @@ import kotlin.coroutines.coroutineContext
         }//apply
 
     }
-
 
     class TimeLineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var userName: TextView = itemView.findViewById(R.id.item_time_line_username)

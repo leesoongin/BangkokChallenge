@@ -1,5 +1,6 @@
 package com.example.bangkokchallenge.timeline
 
+import android.util.Log
 import com.example.bangkokchallenge.model.TimeLineItem
 
 /**
@@ -19,11 +20,32 @@ class TimeLinePresenter(
         timeLineInteractor.getTimeLineData(this)
     }
 
-    override fun onSuccess(noticeArrayList: List<TimeLineItem>) {
+    override fun onClickLike(position: Int) {
+        Log.d("@@@@ONCLICK","@@@@YEAH")
+        timeLineInteractor.putLikeBySelf(position, this)
+    }
+
+    override fun onClickDescription() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClickComment(discription:String) {
+        timeLineView.openToCommentPage(discription)
+    }
+
+    override fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>) {
         timeLineView.setRecyclerViewData(noticeArrayList)
     }
 
-    override fun onFailure(t: Throwable?) {
-        timeLineView.onResponseFailure(t)
+    override fun onTimeLineFailure(t: Throwable?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLikeSuccess(position: Int, isLike: Boolean) {
+        timeLineView.modifyLikeData(position,isLike)
+    }
+
+    override fun onLikeFailure(t: Throwable?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -37,12 +37,17 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
         })
         */
 
-        onFinishedListener.onSuccess(arrayListOf(
-            TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04",5,3),
-            TimeLineItem("2","seoungIn","imageUrl","코로나 19 이겨냅시다 화이팅!", "2020-04-04",5,3),
-            TimeLineItem("3","TaejunP","imageUrl","집콕 챌린지 참여합니다!", "2020-04-03",5,3),
-            TimeLineItem("4","Hongjae","imageUrl","오늘은 집에서 요리를 만들어 봤어요!", "2020-04-03",5,3)
+        onFinishedListener.onTimeLineSuccess(arrayListOf(
+            TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04",5,false,3),
+            TimeLineItem("2","seoungIn","imageUrl","코로나 19 이겨냅시다 화이팅!", "2020-04-04",5,false,3),
+            TimeLineItem("3","TaejunP","imageUrl","집콕 챌린지 참여합니다!", "2020-04-03",5,false,3),
+            TimeLineItem("4","Hongjae","imageUrl","오늘은 집에서 요리를 만들어 봤어요!", "2020-04-03",5,false,3)
         ))
 
+    }
+
+    override fun putLikeBySelf(position: Int, onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
+        //boolean 내려받을것
+        onFinishedListener.onLikeSuccess(position,true)
     }
 }
