@@ -13,6 +13,7 @@ import kotlin.reflect.KProperty
 
 interface PreferenceStorage{
     var userId : String?
+    var nickname: String?
     var userProfileImagePath:String?
     var userToken : String?
 }
@@ -27,13 +28,16 @@ class SharedPreferenceStorage  constructor(context: Context) : PreferenceStorage
     companion object { //key값
         const val PREFS_NAME = "app_prefs_name"
         const val USER_ID = "user_id"
+        const val NICNAME = "user_nickname"
         const val USER_PROFILEIMAGE_PATH="user_profileimage_path"
         const val USER_TOKEN = "user_token"
     }
 
     override var userId by StringPreference(prefs, USER_ID, null)
+    override var nickname by StringPreference(prefs, NICNAME,null)
     override var userProfileImagePath by StringPreference(prefs, USER_PROFILEIMAGE_PATH,null)
     override var userToken by StringPreference(prefs, USER_TOKEN, null)
+
 }
 
 

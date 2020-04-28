@@ -3,6 +3,7 @@ package com.example.bangkokchallenge.login
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,10 @@ import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkokchallenge.BuildConfig
 import com.example.bangkokchallenge.R
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.main.MainActivity
+import com.example.bangkokchallenge.model.AccountDTO
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -40,32 +44,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     /*로그인, 로그아웃 버튼*/
     private lateinit var kakaoLoginButton: Button
     private lateinit var kakaoLogoutButton:Button
+    private lateinit var sharedPreferences : PreferenceStorage
 
     override lateinit var presenter: LoginContract.Presenter
+    private lateinit var interactor:LoginContract.LoginInteractor
 
-    // 세션 콜백 구현
-    private val sessionCallback: ISessionCallback = object : ISessionCallback {
-        override fun onSessionOpened() {
-            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
-                override fun onSuccess(result: MeV2Response) {
-                    val userSessionToken = Session.getCurrentSession().tokenInfo.accessToken
-                    /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
-                    startActivity(Intent(applicationContext,
-                        MainActivity::class.java))
-                    if (BuildConfig.DEBUG) {
-                        //toastMessage("[DEV] onSuccess() user token: $userSessionToken")
-                    }
-                }//onSuccess
-                override fun onSessionClosed(errorResult: ErrorResult) {
-                    // todo : 세션 응답 실패 처리
-                }//closed
-            })
-        }//onSessionOpened
-
-        override fun onSessionOpenFailed(exception: KakaoException) {
-            Log.e("KAKAO_SESSION", "로그인 실패", exception)
-        }
-    }//callback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,16 +56,19 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         initViewBinding()
 
-       // Log.d("@@kakao","${getHashKey(this)}")
-
-        presenter = LoginPresenter(this)
+      //  Log.d("@@kakao","${getHashKey(this)}")
+        sharedPreferences = SharedPreferenceStorage(this)
+        interactor = LoginInteractorImpl()
+        presenter = LoginPresenter(this,interactor)
 
     }
+
 
     override fun onResume() { //onCreate 호출되기 전
         super.onResume()
         presenter.start()
     }
+
 
     override fun onDestroy() { //완전히 종료될 때
         super.onDestroy()
@@ -90,14 +76,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         Session.getCurrentSession().removeCallback(sessionCallback)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
-        /*카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달*/
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-
-            return
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
 
     private fun initViewBinding() {
         kakaoLoginButton = findViewById(R.id.kakao_login_button)
@@ -113,6 +91,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
+
     override fun login() {
         val session = Session.getCurrentSession()
 
@@ -121,12 +100,12 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         session.open(AuthType.KAKAO_LOGIN_ALL, this);
     }
 
+
     override fun logout(){
         //로그아웃
         UserManagement.getInstance().requestLogout(object : LogoutResponseCallback() {
             override fun onCompleteLogout() {
                 Log.i("KAKAO_API", "로그아웃 완료")
-
             }
         })
         //연결해제
@@ -146,7 +125,53 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             })
     }
 
-    fun getHashKey(context: Context): String? { // 키 해시값 출력 코드
+
+    override fun loginSuccess(accountDTO: AccountDTO) {
+        //accountDto에 담긴 정보들 sharedpreference에 저장.
+        sharedPreferences.userId=accountDTO.id
+        sharedPreferences.nickname=accountDTO.nickname
+        sharedPreferences.userProfileImagePath=accountDTO.profile_photo
+        sharedPreferences.userToken=accountDTO.serviceAccessToken
+
+        startActivity(Intent(applicationContext, MainActivity::class.java))
+    }
+
+
+    // 세션 콜백 구현
+    private val sessionCallback: ISessionCallback = object : ISessionCallback {
+        override fun onSessionOpened() {
+            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
+                override fun onSuccess(result: MeV2Response) {
+                    val userSessionToken = Session.getCurrentSession().tokenInfo.accessToken
+
+                    /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
+                    presenter.requestAccessToken(userSessionToken)
+
+                    if (BuildConfig.DEBUG) {
+                        //toastMessage("[DEV] onSuccess() user token: $userSessionToken")
+                    }
+                }//onSuccess
+                override fun onSessionClosed(errorResult: ErrorResult) {
+                    // todo : 세션 응답 실패 처리
+                }//closed
+            })
+        }//onSessionOpened
+
+        override fun onSessionOpenFailed(exception: KakaoException) {
+            Log.e("KAKAO_SESSION", "로그인 실패", exception)
+        }
+    }//callback
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+        /*카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달*/
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+
+            return
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    /*fun getHashKey(context: Context): String? { // 키 해시값 출력 코드
        try {
            if (Build.VERSION.SDK_INT >= 28) {
                val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
@@ -160,7 +185,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                val packageInfo =
                    getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
 
-               for (signature in packageInfo!!.signatures) {
+               for (signature in packageInfo.signatures) {
                    try {
                        val md = MessageDigest.getInstance("SHA")
                        md.update(signature.toByteArray())
@@ -177,5 +202,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
        }
 
        return null
-   }
+   }*/
 }
