@@ -16,6 +16,10 @@ class CommentPresenter(
         commentInteractor.getCommentDate(this)
     }
 
+    override fun requestCloseCommentPage() {
+        commentView.closeCommentPage()
+    }
+
     override fun onSuccess(noticeArrayList:List<CommentItem>) {
         commentView.setRecyclerViewData(noticeArrayList)
     }

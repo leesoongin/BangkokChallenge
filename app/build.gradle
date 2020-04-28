@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -20,6 +24,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField('String','SERVER_URL',keystoreProperties.getProperty("serverURL"))
+            buildConfigField('String','NATIVE_APP_KEY',keystoreProperties.getProperty("nativeAppKey"))
+        }
+        debug{
+            minifyEnabled false
+            debuggable true
+            buildConfigField('String','SERVER_URL',keystoreProperties.getProperty("serverURL"))
+            buildConfigField('String','NATIVE_APP_KEY',keystoreProperties.getProperty("nativeAppKey"))
         }
     }
 
@@ -56,11 +68,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //RetroFit2 Network, Gson
+    //RetroFit2 Network, Gson, OkhttpLogging
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+
 
     //coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"

@@ -13,6 +13,9 @@ class CommentInteractorImpl :CommentContract.CommentInteractor{
             CommentItem("image","seo","hi_4"),
             CommentItem("image","seo","hi_4"),
             CommentItem("image","seo","hi_4"),
+            CommentItem("image","seo","hi_4"),
+            CommentItem("image","seo","hi_4"),
+            CommentItem("image","seo","hi_4"),
             CommentItem("image","seo","hi_4")
         ))
     }

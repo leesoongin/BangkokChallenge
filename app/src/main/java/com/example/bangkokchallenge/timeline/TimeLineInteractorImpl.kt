@@ -1,6 +1,8 @@
 package com.example.bangkokchallenge.timeline
 
 import android.util.Log
+import com.example.bangkokchallenge.data.remote.ApiClient
+import com.example.bangkokchallenge.data.remote.ApiService
 import com.example.bangkokchallenge.model.TimeLineItem
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,27 +17,25 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
 
     override fun getTimeLineData(onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
-      //현재 서버 배포가 되지않은 상황이라 하드 코딩으로 대체함.
+   //   현재 서버 배포가 되지않은 상황이라 하드 코딩으로 대체함.
 
-        /*
-        val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getTimeLineItems("token",0,0) //
-
-        call.enqueue(object : Callback<List<TimeLineItem>> {
-
-            override fun onFailure(call: Call<List<TimeLineItem>>, t: Throwable) {
-                onFinishedListener.onFailure(t)
-            }
-
-            override fun onResponse(call: Call<List<TimeLineItem>>, response: Response<List<TimeLineItem>>) {
-                if(!response.body().isNullOrEmpty()) {
-                    onFinishedListener.onSuccess(response.body()!!)
-                }else {
-                    Log.e("[TimeLineInteractor]","Response Body is Empty")
-                }
-            }
-        })
-        */
+//        val service = ApiClient.getClient().create(ApiService::class.java)
+//        val call = service.getTimeLineItems("token",0,0) //
+//
+//        call.enqueue(object : Callback<List<TimeLineItem>> {
+//
+//            override fun onFailure(call: Call<List<TimeLineItem>>, t: Throwable) {
+//                onFinishedListener.onFailure(t)
+//            }
+//
+//            override fun onResponse(call: Call<List<TimeLineItem>>, response: Response<List<TimeLineItem>>) {
+//                if(!response.body().isNullOrEmpty()) {
+//                    onFinishedListener.onSuccess(response.body()!!)
+//                }else {
+//                    Log.e("[TimeLineInteractor]","Response Body is Empty")
+//                }
+//            }
+//        })
 
         onFinishedListener.onTimeLineSuccess(arrayListOf(
             TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04",5,false,3),
