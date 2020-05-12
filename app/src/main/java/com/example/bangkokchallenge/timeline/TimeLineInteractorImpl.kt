@@ -18,7 +18,7 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
     override fun getTimeLineData(onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getTimeLineItems() //
+        val call = service.getTimeLineItems("Bearer 263713e1-c6c7-42a2-98b5-15fb14574b6d") //
 
         call.enqueue(object : Callback<List<TimeLineItem>> {
 
@@ -36,7 +36,7 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
             }
         })
 
-        onFinishedListener.onTimeLineSuccess(arrayListOf(
+      onFinishedListener.onTimeLineSuccess(arrayListOf(
             TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04","2020",1,false,3),
             TimeLineItem("2","seoungIn","imageUrl","코로나 19 이겨냅시다 화이팅!", "2020-04-04","2020",5,false,3),
             TimeLineItem("3","TaejunP","imageUrl","집콕 챌린지 참여합니다!", "2020-04-03","2020",5,false,3),
