@@ -63,15 +63,16 @@
            android:text="Discription"
            android:gravity="top|left"
            android:layout_width="match_parent"
-           android:layout_height="200dp"/>
+           android:layout_height="100dp"/>
 
         <EditText
             android:id="@+id/post_hash_tag"
             android:layout_marginTop="16dp"
             android:privateImeOptions="defaultInputmode=korean"
             android:text="HashTag"
+            android:gravity="top|left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="100dp"/>
 
         <Button
             android:id="@+id/posting_btn"

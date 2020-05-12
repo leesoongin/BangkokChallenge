@@ -2,6 +2,7 @@ package com.example.bangkokchallenge.timeline
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.model.TimeLineItem
 import kotlinx.android.synthetic.main.item_time_line.*
 
@@ -24,6 +27,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     private lateinit var adapter : TimeLineAdapter
     /*TimeLine Recyclerview*/
     private lateinit var recyclerView: RecyclerView
+    private lateinit var sharedPreferences: PreferenceStorage
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +36,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
         val view =
             LayoutInflater.from(activity).inflate(R.layout.fragment_timeline, container, false)
 
-
+        sharedPreferences=SharedPreferenceStorage(requireContext())
         interactor = TimeLineInteractorImpl()
         presenter = TimeLinePresenter(this@TimelineFragment, interactor)
         initViews(view)

@@ -49,10 +49,9 @@ import kotlin.coroutines.coroutineContext
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
         holder.apply {
             userName.text = dataList[position].userName
-            discription.text = dataList[position].discription
-            date.text = dataList[position].dateTime
-            likeCount.text = "좋아요 ${dataList[position].likeCount}개"
-            commentCount.text = "댓글 ${dataList[position].commentCount}개"
+            discription.text = dataList[position].article
+            date.text = dataList[position].createdAt
+
 
             if(dataList[position].selfLike){
                 likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
@@ -77,8 +76,7 @@ import kotlin.coroutines.coroutineContext
     class TimeLineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
         var discription: TextView = itemView.findViewById(R.id.item_time_line_discription)
-        var likeCount: TextView = itemView.findViewById(R.id.item_time_line_likecount)
-        var commentCount: TextView = itemView.findViewById(R.id.item_time_line_commentcount)
+
         var date: TextView = itemView.findViewById(R.id.item_time_line_date)
 
         /* item */

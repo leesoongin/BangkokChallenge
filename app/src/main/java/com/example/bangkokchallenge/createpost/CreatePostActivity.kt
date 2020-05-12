@@ -88,6 +88,7 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
             Glide.with(this)
                 .load(it) // it -> uri
                 .apply(RequestOptions().fitCenter())
+                .override(300,500)
                 .into(itemImageBinding.ivMedia)
             /* LayoutParams ->  지정된 폭과 높이로 새로운 레이아웃 파라미터 세트를 작성합니다. */
             itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(viewSize, viewSize)

@@ -70,33 +70,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_time_line_image" />
 
-    <TextView
-        android:id="@+id/item_time_line_likecount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toRightOf="@id/item_time_line_like_image"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_image"
-        tools:text="좋아요 2개" />
+
 
     <ImageView
         android:id="@+id/item_time_line_comment_image"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="16dp"
         android:src="@drawable/comment"
-        app:layout_constraintLeft_toRightOf="@id/item_time_line_likecount"
-        app:layout_constraintTop_toTopOf="@id/item_time_line_likecount" />
+        app:layout_constraintLeft_toRightOf="@id/item_time_line_like_image"
+        app:layout_constraintTop_toTopOf="@id/item_time_line_like_image" />
 
-    <TextView
-        android:id="@+id/item_time_line_commentcount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintLeft_toRightOf="@id/item_time_line_comment_image"
-        app:layout_constraintTop_toTopOf="@id/item_time_line_comment_image"
-        tools:text="댓글 2개" />
 
     <TextView
         android:id="@+id/item_time_line_discription"
@@ -110,7 +94,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_likecount"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_like_image"
         tools:text="안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요!" />
 
     <TextView

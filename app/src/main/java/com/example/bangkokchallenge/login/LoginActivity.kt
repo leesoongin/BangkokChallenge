@@ -128,6 +128,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun loginSuccess(accountDTO: AccountDTO) {
         //accountDto에 담긴 정보들 sharedpreference에 저장.
+        /* id가 null 이거나 저장된 값과 다를떄 저장하도록 수정하자 . */
         sharedPreferences.userId=accountDTO.id
         sharedPreferences.nickname=accountDTO.nickname
         sharedPreferences.userProfileImagePath=accountDTO.profile_photo

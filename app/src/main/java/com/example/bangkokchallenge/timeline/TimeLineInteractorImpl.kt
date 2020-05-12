@@ -17,31 +17,30 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
 
     override fun getTimeLineData(onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
-   //   현재 서버 배포가 되지않은 상황이라 하드 코딩으로 대체함.
+        val service = ApiClient.getClient().create(ApiService::class.java)
+        val call = service.getTimeLineItems() //
 
-//        val service = ApiClient.getClient().create(ApiService::class.java)
-//        val call = service.getTimeLineItems("token",0,0) //
-//
-//        call.enqueue(object : Callback<List<TimeLineItem>> {
-//
-//            override fun onFailure(call: Call<List<TimeLineItem>>, t: Throwable) {
-//                onFinishedListener.onFailure(t)
-//            }
-//
-//            override fun onResponse(call: Call<List<TimeLineItem>>, response: Response<List<TimeLineItem>>) {
-//                if(!response.body().isNullOrEmpty()) {
-//                    onFinishedListener.onSuccess(response.body()!!)
-//                }else {
-//                    Log.e("[TimeLineInteractor]","Response Body is Empty")
-//                }
-//            }
-//        })
+        call.enqueue(object : Callback<List<TimeLineItem>> {
+
+            override fun onFailure(call: Call<List<TimeLineItem>>, t: Throwable) {
+               // onFinishedListener.onFailure(t)
+            }
+
+            override fun onResponse(call: Call<List<TimeLineItem>>, response: Response<List<TimeLineItem>>) {
+                if(!response.body().isNullOrEmpty()) {
+                    onFinishedListener.onTimeLineSuccess(response.body()!!)
+                    Log.e("@@time",""+response.body())
+                }else {
+                    Log.e("[TimeLineInteractor]","Response Body is Empty")
+                }
+            }
+        })
 
         onFinishedListener.onTimeLineSuccess(arrayListOf(
-            TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04",5,false,3),
-            TimeLineItem("2","seoungIn","imageUrl","코로나 19 이겨냅시다 화이팅!", "2020-04-04",5,false,3),
-            TimeLineItem("3","TaejunP","imageUrl","집콕 챌린지 참여합니다!", "2020-04-03",5,false,3),
-            TimeLineItem("4","Hongjae","imageUrl","오늘은 집에서 요리를 만들어 봤어요!", "2020-04-03",5,false,3)
+            TimeLineItem("1","junyeong","imageUrl","안녕하세요", "2020-04-04","2020",1,false,3),
+            TimeLineItem("2","seoungIn","imageUrl","코로나 19 이겨냅시다 화이팅!", "2020-04-04","2020",5,false,3),
+            TimeLineItem("3","TaejunP","imageUrl","집콕 챌린지 참여합니다!", "2020-04-03","2020",5,false,3),
+            TimeLineItem("4","Hongjae","imageUrl","오늘은 집에서 요리를 만들어 봤어요!", "2020-04-03","2020",5,false,3)
         ))
 
     }
