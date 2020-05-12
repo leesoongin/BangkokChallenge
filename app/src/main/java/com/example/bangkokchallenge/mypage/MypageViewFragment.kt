@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
@@ -61,7 +62,7 @@ class MypageViewFragment : Fragment() ,MyPageContract.View{
         userProfileAccount=view.findViewById(R.id.user_profile_account)
         Glide
             .with(this)
-            .load(sharedPreference.userProfileImagePath).into(userProfileAccount);
+            .load(sharedPreference.userProfileImagePath).apply(RequestOptions().circleCrop()).into(userProfileAccount);
     }
 
 

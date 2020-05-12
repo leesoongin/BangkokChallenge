@@ -7,14 +7,15 @@ import java.util.*
  */
 
 data class TimeLineItem( //임시 모델.
-    var id : String?,
-    var userName : String?,
+    var id : String?, //kakao id
+    var userName : String?, //kakao nicname
+    var profile_photo : String, // 프로필사진 url
     var imageUrl : String?, //or List<String>
-    var discription : String?,
-    var dateTime : String?,
-    var likeCount : Int?,
-    var selfLike : Boolean,
-    var commentCount: Int?
+    var article : String?, //내용
+    var createdAt : String?, // 생성날짜
+    var likeCount : Int?, //좋아요개수
+    var selfLike : Boolean, //좋아요 여부
+    var commentCount: Int? // 댓글개수
 )
 /*
  String id;

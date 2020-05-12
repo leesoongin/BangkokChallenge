@@ -28,18 +28,16 @@ class MyPageAdapter(
     override fun onBindViewHolder(holder:MyPageItemViewHolder, position: Int) {
         holder.apply{
             userName.text=dataList[position].userName
-            discription.text=dataList[position].discription
-            likeCount.text="좋아요 ${dataList[position].likeCount} 개"
-            commentCount.text="댓글 ${dataList[position].commentCount} 개"
-            date.text=dataList[position].dateTime
+            discription.text=dataList[position].article
+
+            date.text=dataList[position].createdAt
         }
     }
 
     class MyPageItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var userName :TextView= view.findViewById(R.id.item_time_line_username)
         var discription:TextView = view. findViewById(R.id.item_time_line_discription)
-        var likeCount:TextView = view.findViewById(R.id.item_time_line_likecount)
-        var commentCount:TextView=view.findViewById(R.id.item_time_line_commentcount)
+
         var date : TextView = view.findViewById(R.id.item_time_line_date)
     }
 

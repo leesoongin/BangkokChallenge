@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".mypage.MypageViewFragment">
 
+    <!--
+    account_layout
+    user_profile_account
+    post_count_textview_account
+    like_count_textview_account
+    -->
+
     <!-- 회원정보 linearlayout -->
     <LinearLayout
         android:id="@+id/account_layout"
