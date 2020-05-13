@@ -56,7 +56,7 @@ import kotlin.coroutines.coroutineContext
     }
 
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
-        var hashTagMessages : String =""
+
 
         holder.apply {
             dataList?.let {
@@ -69,11 +69,7 @@ import kotlin.coroutines.coroutineContext
 
                 userName.text = it[position].nickname
                 discription.text = it[position].article
-
-                for(message : HashTag in it[position].hashTag!!){ // hashTag 자료형에서 content만 뽑자
-                    hashTagMessages+=message.content+" "
-                }
-                hashTag.text = hashTagMessages
+                hashTag.text = getHashTagMessages(position) // hashTag 자료형에서 content만 뽑아냄
                 date.text= it[position].createdAt
 
                 if(it[position].selfLike){
@@ -118,6 +114,15 @@ import kotlin.coroutines.coroutineContext
         var moreImage:ImageView=itemView.findViewById(R.id.item_time_line_more_image)
     }
 
+    fun getHashTagMessages(position:Int) : String{ //hashTag 에서 content만 뽑기
+        var hashTagMessages =""
+
+        for(message : HashTag in dataList?.get(position)?.hashTag!!){ // hashTag 자료형에서 content만 뽑자
+            hashTagMessages+=message.content+" "
+        }
+
+        return hashTagMessages
+    }
     /*
       var id : String?, //kakao id
     var accountId : String?,
