@@ -57,7 +57,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     }
 
     private fun fetchInitData(){
-        presenter.requestTimeLineDataFromServer()
+        presenter.requestTimeLineDataFromServer(sharedPreferences.userToken)
     }
 
     override fun setRecyclerViewData(responseData: List<TimeLineItem>?) {

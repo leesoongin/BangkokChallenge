@@ -1,6 +1,8 @@
 package com.example.bangkokchallenge.timeline
 
 import android.util.Log
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.data.remote.ApiClient
 import com.example.bangkokchallenge.data.remote.ApiService
 import com.example.bangkokchallenge.model.TimeLineDTO
@@ -17,11 +19,10 @@ import retrofit2.Response
 
 class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
 
-    override fun getTimeLineData(onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
-
+    override fun getTimeLineData(token : String?,onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getTimeLineItems("Bearer 263713e1-c6c7-42a2-98b5-15fb14574b6d") //
+        val call = service.getTimeLineItems("Bearer "+token) //
 
         call.enqueue(object : Callback<ResponseModel<TimeLineDTO>> {
 

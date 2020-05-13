@@ -18,8 +18,8 @@ class TimeLinePresenter(
 
     }
 
-    override fun requestTimeLineDataFromServer() {
-        timeLineInteractor.getTimeLineData(this)
+    override fun requestTimeLineDataFromServer(token : String?) {
+        timeLineInteractor.getTimeLineData(token,this)
     }
 
     override fun onClickLike(position: Int) {
