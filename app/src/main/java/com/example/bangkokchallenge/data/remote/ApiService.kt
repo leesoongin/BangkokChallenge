@@ -1,8 +1,9 @@
 package com.example.bangkokchallenge.data.remote
 
 import com.example.bangkokchallenge.model.AccountDTO
-import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.request.LoginRequest
+import com.example.bangkokchallenge.model.response.ResponseModel
 import com.example.bangkokchallenge.model.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -29,7 +30,7 @@ interface ApiService {
     @GET("post")
     fun getTimeLineItems(
         @Header("Authorization") token:String
-    ): Call<List<TimeLineItem>>
+    ): Call<ResponseModel<TimeLineDTO>>
 
     @Multipart
 @POST("post/upload")

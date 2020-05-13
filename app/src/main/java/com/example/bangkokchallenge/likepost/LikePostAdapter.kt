@@ -25,7 +25,7 @@ class LikePostAdapter(
 
     override fun onBindViewHolder(holder: LikePostItemViewHolder, position: Int) {
         holder.apply {
-            userName.text=dataList[position].userName
+            userName.text=dataList[position].nickname
             discription.text=dataList[position].article
             date.text=dataList[position].createdAt // dateTime
         }

@@ -1,7 +1,9 @@
 package com.example.bangkokchallenge.timeline
 
 import android.util.Log
+import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.ResponseModel
 
 /**
  * Created by choejun-yeong on 04/04/2020.
@@ -33,7 +35,7 @@ class TimeLinePresenter(
         timeLineView.openToCommentPage(discription)
     }
 
-    override fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>) {
+    override fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>?) {
         timeLineView.setRecyclerViewData(noticeArrayList)
     }
 
