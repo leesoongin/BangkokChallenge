@@ -10,9 +10,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
+import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.ResponseModel
 import java.sql.Time
 import kotlin.coroutines.coroutineContext
 
@@ -25,14 +29,18 @@ import kotlin.coroutines.coroutineContext
     private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
-    private lateinit var dataList : List<TimeLineItem>
+    private var dataList : List<TimeLineItem>? = null
 
-    fun setDataList(dataList : List<TimeLineItem>){
+    fun setDataList(dataList : List<TimeLineItem>?){
         this@TimeLineAdapter.dataList = dataList
+
+        notifyDataSetChanged()
     }
 
     fun modifyLikeData(position: Int, boolean: Boolean){
-        dataList[position].selfLike = boolean
+        dataList?.let {
+            it[position].selfLike = boolean
+        }
         notifyDataSetChanged()
     }
 
@@ -43,23 +51,32 @@ import kotlin.coroutines.coroutineContext
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return dataList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
         holder.apply {
-            userName.text = dataList[position].userName
-            discription.text = dataList[position].article
-            date.text = dataList[position].createdAt
+            dataList?.let {
 
+                Glide.with(profileImage.context).load(it[position].profile_photo).apply(RequestOptions().circleCrop()).override(300,500)
+                    .into(profileImage)
 
-            if(dataList[position].selfLike){
-                likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
-            }else{
-                likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like))
+                Glide.with(timeLineImage.context).load(it[position].filePath)
+                    .into(timeLineImage)
+
+                userName.text = it[position].nickname
+                discription.text = it[position].article
+                date.text= it[position].createdAt
+
+                if(it[position].selfLike){
+                    likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
+                }else{
+                    likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like))
+                }
             }
 
             likeImage.setOnClickListener {
+
                 listener.onClickLike(position)
             }
             commentImage.setOnClickListener {
@@ -74,14 +91,36 @@ import kotlin.coroutines.coroutineContext
     }
 
     class TimeLineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
-        var discription: TextView = itemView.findViewById(R.id.item_time_line_discription)
 
+        var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
+        var profileImage :ImageView = itemView.findViewById(R.id.item_time_line_profile_image) //프로필 이미지
+        var timeLineImage : ImageView = itemView.findViewById(R.id.item_time_line_image) //게시물 이미지
+
+        /* comment , like */
+        var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)
+        var commentImage:ImageView=itemView.findViewById(R.id.item_time_line_comment_image)
+
+        /* article date */
+        var discription: TextView = itemView.findViewById(R.id.item_time_line_discription) //article
         var date: TextView = itemView.findViewById(R.id.item_time_line_date)
 
         /* item */
-        var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)
-        var commentImage:ImageView=itemView.findViewById(R.id.item_time_line_comment_image)
+
         var moreImage:ImageView=itemView.findViewById(R.id.item_time_line_more_image)
     }
+
+    /*
+      var id : String?, //kakao id
+    var accountId : String?,
+    var nickName : String?, //kakao nicname
+    var profile_photo : String, // 프로필사진 url
+    var filePath : String?, //or List<String>
+    var article : String?, //내용
+    var createdAt : String?, // 생성날짜
+    var modifiedAt : String?,
+    var hashTag : List<HashTag>?,
+    var likeCount : Int?, //좋아요개수
+    var selfLike : Boolean, //좋아요 여부
+    var commentCount: Int?// 댓글개수
+    * */
 }

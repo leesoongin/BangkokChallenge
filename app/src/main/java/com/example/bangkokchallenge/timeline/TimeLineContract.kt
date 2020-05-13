@@ -2,7 +2,9 @@ package com.example.bangkokchallenge.timeline
 
 import com.example.bangkokchallenge.base.BasePresenter
 import com.example.bangkokchallenge.base.BaseView
+import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.ResponseModel
 
 /**
  * Created by choejun-yeong on 04/04/2020.
@@ -13,7 +15,7 @@ interface TimeLineContract {
 
 
     interface View : BaseView<Presenter> {
-        fun setRecyclerViewData(responseData : List<TimeLineItem>)
+        fun setRecyclerViewData(responseData : List<TimeLineItem>?)
 
         fun modifyLikeData(position:Int, boolean: Boolean)
 
@@ -36,7 +38,7 @@ interface TimeLineContract {
 
 
          interface OnFinishedListener {
-             fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>)
+             fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>?)
 
              fun onTimeLineFailure(t: Throwable?)
 

@@ -62,7 +62,7 @@ class MypageViewFragment : Fragment() ,MyPageContract.View{
         userProfileAccount=view.findViewById(R.id.user_profile_account)
         Glide
             .with(this)
-            .load(sharedPreference.userProfileImagePath).apply(RequestOptions().circleCrop()).into(userProfileAccount);
+            .load(sharedPreference.userProfileImagePath).apply(RequestOptions().circleCrop()).into(userProfileAccount)
     }
 
 

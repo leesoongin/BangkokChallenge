@@ -1,0 +1,158 @@
+{
+  "_embedded" : {
+    "postList" : [ {
+      "createdAt" : "2020-05-06T04:00:54.750224",
+      "modifiedAt" : "2020-05-06T04:00:54.750224",
+      "accountId" : "TDD_USER_ID",
+      "id" : 1,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.839467",
+      "modifiedAt" : "2020-05-06T04:00:54.839467",
+      "accountId" : "TDD_USER_ID",
+      "id" : 3,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.870255",
+      "modifiedAt" : "2020-05-06T04:00:54.870255",
+      "accountId" : "TDD_USER_ID",
+      "id" : 5,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.905788",
+      "modifiedAt" : "2020-05-06T04:00:54.905788",
+      "accountId" : "TDD_USER_ID",
+      "id" : 7,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.929966",
+      "modifiedAt" : "2020-05-06T04:00:54.929966",
+      "accountId" : "TDD_USER_ID",
+      "id" : 9,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.9484",
+      "modifiedAt" : "2020-05-06T04:00:54.9484",
+      "accountId" : "TDD_USER_ID",
+      "id" : 11,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.966866",
+      "modifiedAt" : "2020-05-06T04:00:54.966866",
+      "accountId" : "TDD_USER_ID",
+      "id" : 13,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:54.991415",
+      "modifiedAt" : "2020-05-06T04:00:54.991415",
+      "accountId" : "TDD_USER_ID",
+      "id" : 15,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:55.079255",
+      "modifiedAt" : "2020-05-06T04:00:55.079255",
+      "accountId" : "TDD_USER_ID",
+      "id" : 17,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    }, {
+      "createdAt" : "2020-05-06T04:00:55.110021",
+      "modifiedAt" : "2020-05-06T04:00:55.110021",
+      "accountId" : "TDD_USER_ID",
+      "id" : 19,
+      "article" : "작성내용",
+      "hashTag" : "일상",
+      "nickname" : "Kakao Nickname",
+      "profile_photo" : "Kakao profile photo",
+      "selfLike" : false,
+      "commentCount" : 0,
+      "likeCount" : 0,
+      "filePath" : "S3 image 주소"
+    } ]
+  },
+  "_links" : {
+    "first" : {
+      "href" : "http://localhost:8080/api/post?page=0&size=10"
+    },
+    "self" : {
+      "href" : "http://localhost:8080/api/post?page=0&size=10"
+    },
+    "next" : {
+      "href" : "http://localhost:8080/api/post?page=1&size=10"
+    },
+    "last" : {
+      "href" : "http://localhost:8080/api/post?page=3&size=10"
+    },
+    "profile" : {
+      "href" : "/docs/index.html#resource-post-list"
+    }
+  },
+  "page" : {
+    "size" : 10,
+    "totalElements" : 40,
+    "totalPages" : 4,
+    "number" : 0
+  }
+}
