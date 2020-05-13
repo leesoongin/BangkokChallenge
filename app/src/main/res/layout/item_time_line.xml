@@ -98,6 +98,19 @@
         tools:text="안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요!" />
 
     <TextView
+        android:id="@+id/item_time_line_hash_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="#043860"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_discription"
+        tools:text="hash_tag" />
+
+    <TextView
         android:id="@+id/item_time_line_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,7 +118,7 @@
         android:layout_marginTop="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_discription"
+        app:layout_constraintTop_toBottomOf="@+id/item_time_line_hash_tag"
         tools:text="2020-04-04" />
 
 

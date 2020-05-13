@@ -26,7 +26,7 @@ interface ApiService {
         @Body key: LoginRequest
     ): Call<AccountDTO>
 
-    @GET("post/list")
+    @GET("post")
     fun getTimeLineItems(
         @Header("Authorization") token:String
     ): Call<List<TimeLineItem>>
@@ -39,4 +39,5 @@ fun uploadPost(
     @Part("hashTag") hashTag: RequestBody,
     @Part("file") image: MultipartBody.Part
 ): Call<UploadResponse>
+
 }
