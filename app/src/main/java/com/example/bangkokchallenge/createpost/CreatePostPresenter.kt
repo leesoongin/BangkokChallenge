@@ -5,11 +5,16 @@ package com.example.bangkokchallenge.createpost
  */
 
 class CreatePostPresenter(
-    private val createPostView: CreatePostContract.View
-) : CreatePostContract.Presenter {
+    private val createPostView: CreatePostContract.View,
+    private val createPostInteractor: CreatePostContract.CreatePostInteractor
+) : CreatePostContract.Presenter,CreatePostContract.CreatePostInteractor.OnFinishedListener {
 
     override fun requestPosting() {
-        createPostView.posting()
+        createPostInteractor.sendPost(this)
+    }
+
+    override fun OnSendPostSuccess() {
+
     }
 
     override fun start() {
