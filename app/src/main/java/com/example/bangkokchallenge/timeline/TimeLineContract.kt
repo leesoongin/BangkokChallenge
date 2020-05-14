@@ -26,13 +26,13 @@ interface TimeLineContract {
 
 
     interface Presenter : BasePresenter, TimeLineItemClickListener {
-        fun requestTimeLineDataFromServer()
+        fun requestTimeLineDataFromServer(token : String?)
     }
 
 
     interface TimeLineInteractor{
         /*like , comment get data*/
-        fun getTimeLineData(onFinishedListener: OnFinishedListener)
+        fun getTimeLineData(token : String?,onFinishedListener: OnFinishedListener)
 
         fun putLikeBySelf(position: Int, onFinishedListener: OnFinishedListener)
 

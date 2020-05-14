@@ -17,15 +17,11 @@ import retrofit2.http.*
 
 interface ApiService {
 
-//    @GET("timeline")
-//    fun getTimeLineItems(
-//        @Header("Authorization") token: String
-
-    //    ): Call<List<TimeLineItem>>
     @POST("account/login")
     fun login(
         @Body key: LoginRequest
     ): Call<AccountDTO>
+
 
     @GET("post")
     fun getTimeLineItems(
@@ -33,12 +29,12 @@ interface ApiService {
     ): Call<ResponseModel<TimeLineDTO>>
 
     @Multipart
-@POST("post/upload")
-fun uploadPost(
-    @Header("Authorization") token: String,
-    @Part("article") article: RequestBody,
-    @Part("hashTag") hashTag: RequestBody,
-    @Part("file") image: MultipartBody.Part
-): Call<UploadResponse>
+    @POST("post/upload")
+    fun uploadPost(
+        @Header("Authorization") token: String,
+        @Part("article") article: RequestBody,
+        @Part("hashTag") hashTag: RequestBody,
+        @Part("file") image: MultipartBody.Part
+    ): Call<UploadResponse>
 
 }

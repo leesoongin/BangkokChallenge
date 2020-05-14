@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
+import com.example.bangkokchallenge.model.HashTag
 import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
 import com.example.bangkokchallenge.model.response.ResponseModel
@@ -55,6 +56,8 @@ import kotlin.coroutines.coroutineContext
     }
 
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
+
+
         holder.apply {
             dataList?.let {
 
@@ -66,6 +69,7 @@ import kotlin.coroutines.coroutineContext
 
                 userName.text = it[position].nickname
                 discription.text = it[position].article
+                hashTag.text = getHashTagMessages(position) // hashTag 자료형에서 content만 뽑아냄
                 date.text= it[position].createdAt
 
                 if(it[position].selfLike){
@@ -102,13 +106,23 @@ import kotlin.coroutines.coroutineContext
 
         /* article date */
         var discription: TextView = itemView.findViewById(R.id.item_time_line_discription) //article
-        var date: TextView = itemView.findViewById(R.id.item_time_line_date)
+        var hashTag : TextView = itemView.findViewById(R.id.item_time_line_hash_tag) // hashtag
+        var date: TextView = itemView.findViewById(R.id.item_time_line_date)   //createAt
 
         /* item */
 
         var moreImage:ImageView=itemView.findViewById(R.id.item_time_line_more_image)
     }
 
+    fun getHashTagMessages(position:Int) : String{ //hashTag 에서 content만 뽑기
+        var hashTagMessages =""
+
+        for(message : HashTag in dataList?.get(position)?.hashTag!!){ // hashTag 자료형에서 content만 뽑자
+            hashTagMessages+=message.content+" "
+        }
+
+        return hashTagMessages
+    }
     /*
       var id : String?, //kakao id
     var accountId : String?,

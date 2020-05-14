@@ -28,13 +28,15 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
     private var post_hashTag_text:String?=null
 
 
-    override lateinit var presenter: CreatePostContract.Presenter
+    override lateinit var presenter : CreatePostContract.Presenter
+    private lateinit var interactor :CreatePostContract.CreatePostInteractor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post)
 
-        presenter=CreatePostPresenter(this@CreatePostActivity) //presenter 설정
+        interactor=CreatePostInteractorImpl()
+        presenter=CreatePostPresenter(this@CreatePostActivity,interactor) //presenter 설정
 
         initView()
 
@@ -42,9 +44,10 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
         loadImage()
     }
 
-    override fun posting(){
+   /* override fun posting(){
+
         finish() //Todo :  설명, 해시태그, 사진 서버로 전송
-    }
+    }*/
 
     private fun initView(){
         /* 설명, 해시태그, 게시하기*/
