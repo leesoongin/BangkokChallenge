@@ -12,8 +12,11 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.databinding.ActivityCreatePostBinding
 import com.example.bangkokchallenge.databinding.ItemImageBinding
+import com.example.bangkokchallenge.model.CreatePostDTO
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kotlinx.android.synthetic.main.activity_create_post.*
 
@@ -30,6 +33,10 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
 
     override lateinit var presenter : CreatePostContract.Presenter
     private lateinit var interactor :CreatePostContract.CreatePostInteractor
+    private lateinit var sharedPreference : PreferenceStorage
+
+    /* image uri , content, hashTag */
+    private lateinit var createPostDTO : CreatePostDTO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,25 +44,31 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
 
         interactor=CreatePostInteractorImpl()
         presenter=CreatePostPresenter(this@CreatePostActivity,interactor) //presenter 설정
+        sharedPreference = SharedPreferenceStorage(this)
 
         initView()
-
-        /* 이미지 불러오기 , 게시하기 */
         loadImage()
     }
 
-   /* override fun posting(){
+    override fun setPostDataAndRequestUpload(){
+        post_discription_text = post_discription.text.toString()
+        post_hashTag_text=post_hash_tag.text.toString()
+        createPostDTO = CreatePostDTO(sharedPreference.userToken,selectedUriList,post_discription_text,post_hashTag_text)
 
-        finish() //Todo :  설명, 해시태그, 사진 서버로 전송
-    }*/
+        presenter.requestUploadPost(createPostDTO)
+    }
+
+    override fun finishUpload() {
+        finish() // 업로드 성공시 activity finish
+    }
 
     private fun initView(){
         /* 설명, 해시태그, 게시하기*/
         post_discription_text=post_discription.text.toString()
         post_hashTag_text=post_hash_tag.text.toString()
 
-        posting_btn.setOnClickListener {
-            presenter.requestPosting()
+        posting_btn.setOnClickListener { //게시하기 버튼
+            presenter.pressedUploadButton()
         }
     }
 
@@ -69,11 +82,13 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
                 .errorListener { message -> Log.d("ted", "message: $message") }
                 .selectedUri(selectedUriList)
                 .startMultiImage { list: List<Uri> -> showMultiImage(list) }
+
     }
 
     private fun showMultiImage(uriList: List<Uri>) {
         this.selectedUriList = uriList
-        Log.d("uriList", "uriList: $uriList")
+
+        Log.d("@@path","{$selectedUriList}")
         binding.ivImage.visibility = View.GONE
         binding.containerSelectedPhotos.visibility = View.VISIBLE
 
@@ -97,6 +112,5 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
             itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(viewSize, viewSize)
             binding.containerSelectedPhotos.addView(itemImageBinding.root)
         }
-
     }
 }

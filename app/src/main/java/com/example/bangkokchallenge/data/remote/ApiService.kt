@@ -31,10 +31,10 @@ interface ApiService {
     @Multipart
     @POST("post/upload")
     fun uploadPost(
-        @Header("Authorization") token: String,
+        @Header("Authorization") token: String, //bearer :
         @Part("article") article: RequestBody,
         @Part("hashTag") hashTag: RequestBody,
-        @Part("file") image: MultipartBody.Part
+        @Part name: MultipartBody.Part
     ): Call<UploadResponse>
 
 }
