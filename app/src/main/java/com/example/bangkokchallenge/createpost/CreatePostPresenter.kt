@@ -1,5 +1,7 @@
 package com.example.bangkokchallenge.createpost
 
+import com.example.bangkokchallenge.model.CreatePostDTO
+
 /**
  * Created by choejun-yeong on 04/04/2020.
  */
@@ -9,8 +11,10 @@ class CreatePostPresenter(
     private val createPostInteractor: CreatePostContract.CreatePostInteractor
 ) : CreatePostContract.Presenter,CreatePostContract.CreatePostInteractor.OnFinishedListener {
 
-    override fun requestPosting() {
-        createPostInteractor.sendPost(this)
+    override fun requestPosting(createPostDTO : CreatePostDTO) {
+        createPostView.posting()
+        createPostInteractor.sendPost(this,createPostDTO)
+
     }
 
     override fun OnSendPostSuccess() {
