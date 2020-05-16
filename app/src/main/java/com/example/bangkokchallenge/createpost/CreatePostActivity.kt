@@ -47,17 +47,19 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
         sharedPreference = SharedPreferenceStorage(this)
 
         initView()
-
-        /* 이미지 불러오기 , 게시하기 */
         loadImage()
-
-        //createPostDTO = CreatePostDTO(selectedUriList,post_discription_text,post_hashTag_text)
-
     }
 
-    override fun posting(){
+    override fun setPostDataAndRequestUpload(){
+        post_discription_text = post_discription.text.toString()
+        post_hashTag_text=post_hash_tag.text.toString()
+        createPostDTO = CreatePostDTO(sharedPreference.userToken,selectedUriList,post_discription_text,post_hashTag_text)
 
-       // finish() //Todo :  설명, 해시태그, 사진 서버로 전송
+        presenter.requestUploadPost(createPostDTO)
+    }
+
+    override fun finishUpload() {
+        finish() // 업로드 성공시 activity finish
     }
 
     private fun initView(){
@@ -65,8 +67,8 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
         post_discription_text=post_discription.text.toString()
         post_hashTag_text=post_hash_tag.text.toString()
 
-        posting_btn.setOnClickListener {
-            presenter.requestPosting(createPostDTO)
+        posting_btn.setOnClickListener { //게시하기 버튼
+            presenter.pressedUploadButton()
         }
     }
 
@@ -110,8 +112,5 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
             itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(viewSize, viewSize)
             binding.containerSelectedPhotos.addView(itemImageBinding.root)
         }
-
-        /* 이걸 어디다 넣어야할지 모르갯음 ㅠ 이미지가 다 선택되서 selectedUriList가 정해지는 시점이 이때. */
-        createPostDTO = CreatePostDTO(sharedPreference.userToken,selectedUriList,post_discription_text,post_hashTag_text)
     }
 }

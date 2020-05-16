@@ -11,14 +11,16 @@ class CreatePostPresenter(
     private val createPostInteractor: CreatePostContract.CreatePostInteractor
 ) : CreatePostContract.Presenter,CreatePostContract.CreatePostInteractor.OnFinishedListener {
 
-    override fun requestPosting(createPostDTO : CreatePostDTO) {
+    override fun pressedUploadButton() { // 버튼 눌림
         createPostView.posting()
-        createPostInteractor.sendPost(this,createPostDTO)
+    }
 
+    override fun requestUploadPost(createPostDTO: CreatePostDTO) { // 눌린후 서버에 업로드 요청
+        createPostInteractor.sendPost(this,createPostDTO)
     }
 
     override fun OnSendPostSuccess() {
-
+        createPostView.finishUpload()
     }
 
     override fun start() {

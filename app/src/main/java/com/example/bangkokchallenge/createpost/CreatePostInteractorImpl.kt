@@ -39,7 +39,7 @@ class CreatePostInteractorImpl : CreatePostContract.CreatePostInteractor{
         val article = RequestBody.create("text/plain".toMediaTypeOrNull(),createPostDTO.article.toString())
         val hashTag = RequestBody.create("text/plain".toMediaTypeOrNull(),createPostDTO.hashTag.toString())
 
-        Log.d("@@hashTag",)
+        Log.d("@@hashTag","${hashTag.toString()}")
 
         val service = ApiClient.getClient().create(ApiService::class.java)
         val call = service.uploadPost("Bearer "+createPostDTO.token,article,hashTag,MultipartBody.Part.createFormData("file",file.name,surveyBody)) //
@@ -59,34 +59,5 @@ class CreatePostInteractorImpl : CreatePostContract.CreatePostInteractor{
                 }
             }
         })
-    }
-
-
-    fun SaveBitmapToFileCache(bitMap : Bitmap , strFilePath : String?) : File{
-        var file =File(strFilePath)
-        var outputStream : OutputStream ? =null
-
-        try{
-            file.createNewFile()
-            outputStream = FileOutputStream(file)
-
-            bitMap.compress(Bitmap.CompressFormat.JPEG , 100 , outputStream)
-        }catch (t: Exception){
-            Log.e("bit","{${t.message}}")
-        }
-
-        finally {
-            try
-            {
-                outputStream?.close();
-            }
-            catch (t : IOException)
-            {
-                Log.e("outputStreamClose","{${t.message}}")
-            }
-        } //finally
-
-        return file
-    }//fun
-
+    }//sendPost
 }

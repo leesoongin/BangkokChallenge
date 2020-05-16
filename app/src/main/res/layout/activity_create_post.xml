@@ -69,7 +69,7 @@
             android:id="@+id/post_hash_tag"
             android:layout_marginTop="16dp"
             android:privateImeOptions="defaultInputmode=korean"
-            android:text="HashTag"
+            android:text="#HashTag"
             android:gravity="top|left"
             android:layout_width="match_parent"
             android:layout_height="100dp"/>
