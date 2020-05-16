@@ -12,7 +12,7 @@ class CreatePostPresenter(
 ) : CreatePostContract.Presenter,CreatePostContract.CreatePostInteractor.OnFinishedListener {
 
     override fun pressedUploadButton() { // 버튼 눌림
-        createPostView.posting()
+        createPostView.setPostDataAndRequestUpload()
     }
 
     override fun requestUploadPost(createPostDTO: CreatePostDTO) { // 눌린후 서버에 업로드 요청
