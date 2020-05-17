@@ -2,7 +2,9 @@ package com.example.bangkokchallenge.data.remote
 
 import com.example.bangkokchallenge.model.AccountDTO
 import com.example.bangkokchallenge.model.TimeLineDTO
+import com.example.bangkokchallenge.model.request.CommentRequest
 import com.example.bangkokchallenge.model.request.LoginRequest
+import com.example.bangkokchallenge.model.response.CommentResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 import com.example.bangkokchallenge.model.response.UploadResponse
 import okhttp3.MultipartBody
@@ -17,17 +19,19 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    /* login */
     @POST("account/login")
-    fun login(
+    fun login( // login
         @Body key: LoginRequest
     ): Call<AccountDTO>
 
-
+    /* post list */
     @GET("post")
     fun getTimeLineItems(
         @Header("Authorization") token:String
     ): Call<ResponseModel<TimeLineDTO>>
 
+    /* post upload */
     @Multipart
     @POST("post/upload")
     fun uploadPost(
@@ -36,5 +40,16 @@ interface ApiService {
         @Part("hashTag") hashTag: RequestBody,
         @Part name: MultipartBody.Part
     ): Call<UploadResponse>
+
+    @GET("post/1/comment")
+    fun getCommentItem(
+        @Header("Authorization") token : String
+    ):Call<List<CommentResponse>>
+
+    @POST("post/1/comment")
+    fun sendCommentItem(
+        @Header("Authorization") token : String,
+        @Body content : CommentRequest
+    ):Call<CommentResponse>
 
 }

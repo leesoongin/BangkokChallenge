@@ -1,7 +1,7 @@
 package com.example.bangkokchallenge.comment
 
-import com.example.bangkokchallenge.model.CommentItem
-import org.w3c.dom.Comment
+import android.util.Log
+import com.example.bangkokchallenge.model.response.CommentResponse
 
 class CommentPresenter(
     private val commentView:CommentContract.View,
@@ -12,16 +12,24 @@ class CommentPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun requestCommentDateFromServer() {
-        commentInteractor.getCommentDate(this)
+    override fun requestCommentDataFromServer(token : String?) {
+        commentInteractor.getCommentData(this,token)
+    }
+
+    override fun requestSendCommentDataToServer(token : String?) {
+        commentInteractor.sendCommentData(this,token)
     }
 
     override fun requestCloseCommentPage() {
         commentView.closeCommentPage()
     }
 
-    override fun onSuccess(noticeArrayList:List<CommentItem>) {
+    override fun getCommentDataSuccess(noticeArrayList: List<CommentResponse>) {
         commentView.setRecyclerViewData(noticeArrayList)
+    }
+
+    override fun sendCommentDataSuccess(commentResponse: CommentResponse) {
+       Log.d("@@sendComment2","${commentResponse}")
     }
 
 }
