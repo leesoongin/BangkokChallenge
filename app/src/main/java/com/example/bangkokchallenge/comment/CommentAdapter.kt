@@ -15,9 +15,11 @@ class CommentAdapter (
     private val dataList:List<CommentResponse>
 ):RecyclerView.Adapter<CommentAdapter.CommentItemViewHolder>(){
 
-
+    private var commentList : List<CommentResponse>?=null
 
     fun setCommentList(){
+        this@CommentAdapter.commentList = dataList
+
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):CommentItemViewHolder {
