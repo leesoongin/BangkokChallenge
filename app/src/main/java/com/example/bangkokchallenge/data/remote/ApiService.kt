@@ -41,15 +41,17 @@ interface ApiService {
         @Part name: MultipartBody.Part
     ): Call<UploadResponse>
 
-    @GET("post/1/comment")
+    @GET("post/{post_id}/comment")
     fun getCommentItem(
-        @Header("Authorization") token : String
+        @Header("Authorization") token : String,
+        @Path("post_id") postId : Int
     ):Call<List<CommentResponse>>
 
-    @POST("post/1/comment")
+    @POST("post/{post_id}/comment")
     fun sendCommentItem(
         @Header("Authorization") token : String,
-        @Body content : CommentRequest
+        @Body content : CommentRequest,
+        @Path("post_id") postId : Int
     ):Call<CommentResponse>
 
 }

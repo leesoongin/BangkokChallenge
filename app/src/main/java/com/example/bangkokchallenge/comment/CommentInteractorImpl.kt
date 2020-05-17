@@ -12,10 +12,11 @@ import retrofit2.Response
 
 class CommentInteractorImpl :CommentContract.CommentInteractor{
 
-    override fun getCommentData(onFinishedListener: CommentContract.CommentInteractor.OnFinishedListener,token : String?) {
+    override fun getCommentData(onFinishedListener: CommentContract.CommentInteractor.OnFinishedListener,token : String?,postId : Int) {
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getCommentItem("Bearer "+token)
+        val call = service.getCommentItem("Bearer "+token,postId)
+
 
         call.enqueue(object : Callback<List<CommentResponse>> {
 
@@ -33,9 +34,9 @@ class CommentInteractorImpl :CommentContract.CommentInteractor{
         })
     }
 
-    override fun sendCommentData(onFinishedListener: CommentContract.CommentInteractor.OnFinishedListener, token: String?) {
+    override fun sendCommentData(onFinishedListener: CommentContract.CommentInteractor.OnFinishedListener, token: String?,comment:String?,postId: Int) {
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.sendCommentItem("Bearer "+token, CommentRequest("test1"))
+        val call = service.sendCommentItem("Bearer "+token, CommentRequest(comment.toString()),postId)
 
         call.enqueue(object : Callback<CommentResponse> {
 

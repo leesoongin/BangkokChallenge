@@ -12,12 +12,13 @@ class CommentPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun requestCommentDataFromServer(token : String?) {
-        commentInteractor.getCommentData(this,token)
+    override fun requestCommentDataFromServer(token : String?,postId : Int) {
+        commentInteractor.getCommentData(this,token,postId)
     }
 
-    override fun requestSendCommentDataToServer(token : String?) {
-        commentInteractor.sendCommentData(this,token)
+    override fun requestSendCommentDataToServer(token : String?,comment:String?,postId :Int) {
+        commentInteractor.sendCommentData(this,token,comment,postId)
+
     }
 
     override fun requestCloseCommentPage() {

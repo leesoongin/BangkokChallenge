@@ -12,17 +12,17 @@ interface CommentContract {
     }
 
     interface Presenter:BasePresenter{
-        fun requestCommentDataFromServer(token : String?)
+        fun requestCommentDataFromServer(token : String?,postId : Int)
 
-        fun requestSendCommentDataToServer(token : String?)
+        fun requestSendCommentDataToServer(token : String?,comment : String?,postId : Int)
 
         fun requestCloseCommentPage()
     }
 
     interface CommentInteractor{
-        fun getCommentData(onFinishedListener:OnFinishedListener, token : String?)
+        fun getCommentData(onFinishedListener:OnFinishedListener, token : String?,postId : Int)
 
-        fun sendCommentData(onFinishedListener:OnFinishedListener, token: String?)
+        fun sendCommentData(onFinishedListener:OnFinishedListener, token: String?,comment:String?,postId: Int)
 
         interface OnFinishedListener{
             fun getCommentDataSuccess(noticeArrayList:List<CommentResponse>)

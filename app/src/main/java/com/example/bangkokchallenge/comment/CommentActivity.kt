@@ -2,7 +2,9 @@ package com.example.bangkokchallenge.comment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,7 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
 
     private lateinit var recyclerView:RecyclerView
     private lateinit var discription:TextView
+    private lateinit var comment : EditText
     private lateinit var backBtn:ImageView
     private lateinit var sendBtn:Button
 
@@ -36,11 +39,12 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
         sharedPreference = SharedPreferenceStorage(this)
 
 
-        presenter.requestCommentDataFromServer(sharedPreference.userToken)
+        presenter.requestCommentDataFromServer(sharedPreference.userToken,intent.getIntExtra("postId",0))
     }
 
     override fun setRecyclerViewData(responseData: List<CommentResponse>) {
         recyclerView.adapter=CommentAdapter(responseData)
+        (recyclerView.adapter as CommentAdapter).setCommentList()
     }
 
     override fun closeCommentPage() {
@@ -54,6 +58,8 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
         discription=findViewById(R.id.comment_discription)
         discription.text=intent.getStringExtra("discription")
 
+        comment=findViewById(R.id.comment_edittext_comment) //전송할 댓글
+
         backBtn=findViewById(R.id.back_btn)
         backBtn.setOnClickListener {
             presenter.requestCloseCommentPage()
@@ -61,7 +67,8 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
 
         sendBtn=findViewById(R.id.comment_button_sendButton)
         sendBtn.setOnClickListener {
-            presenter.requestSendCommentDataToServer(sharedPreference.userToken)
+
+            presenter.requestSendCommentDataToServer(sharedPreference.userToken,comment.text.toString(),intent.getIntExtra("postId",0))
         }
     }//initViews
 }

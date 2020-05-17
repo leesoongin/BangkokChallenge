@@ -85,7 +85,7 @@ import kotlin.coroutines.coroutineContext
             }
             commentImage.setOnClickListener {
                 //discription 을 가지고가자
-                listener.onClickComment(discription.text.toString())
+                listener.onClickComment(discription.text.toString(),dataList?.get(position)?.id)
             }
             moreImage.setOnClickListener {
                 Log.d("이벤트리스너","more")
