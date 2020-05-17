@@ -6,13 +6,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
-import com.example.bangkokchallenge.model.CommentItem
+import com.example.bangkokchallenge.model.response.CommentResponse
 
 class CommentAdapter (
-    private val dataList:List<CommentItem>
+    private val dataList:List<CommentResponse>
 ):RecyclerView.Adapter<CommentAdapter.CommentItemViewHolder>(){
 
+    private var commentList : List<CommentResponse>?=null
+
+    fun setCommentList(){
+        this@CommentAdapter.commentList = dataList
+
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):CommentItemViewHolder {
         var view=LayoutInflater.from(parent.context).inflate(R.layout.item_comment,parent,false)
 
@@ -25,9 +34,14 @@ class CommentAdapter (
 
     override fun onBindViewHolder(holder: CommentItemViewHolder, position: Int) {
         holder.apply {
-            userName.text=dataList[position].userName
-            comment.text=dataList[position].comment
-        }
+            dataList.let {
+                Glide.with(profileImage.context).load(it[position].profile_photo).apply(RequestOptions().circleCrop()).override(300,500)
+                    .into(profileImage)
+
+                userName.text=it[position].nickname
+                comment.text=it[position].content
+            }//let
+        }//apply
     }
 
     class CommentItemViewHolder(view:View):RecyclerView.ViewHolder(view){

@@ -23,7 +23,6 @@ class TimeLinePresenter(
     }
 
     override fun onClickLike(position: Int) {
-        Log.d("@@@@ONCLICK","@@@@YEAH")
         timeLineInteractor.putLikeBySelf(position, this)
     }
 
@@ -31,8 +30,8 @@ class TimeLinePresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onClickComment(discription:String) {
-        timeLineView.openToCommentPage(discription)
+    override fun onClickComment(discription:String,postId:Int?) {
+        timeLineView.openToCommentPage(discription,postId)
     }
 
     override fun onTimeLineSuccess(noticeArrayList: List<TimeLineItem>?) {

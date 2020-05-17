@@ -10,8 +10,8 @@ data class TimeLineDTO(
 )
 
 data class TimeLineItem( //임시 모델.
-    var id : String?, //kakao id
-    var accountId : String?,
+    var id : Int?, //postId
+    var accountId : String?, //작성자 kakao talk id
     var nickname : String?, //kakao nicname
     var profile_photo : String, // 프로필사진 url
     var filePath : String?, //or List<String>

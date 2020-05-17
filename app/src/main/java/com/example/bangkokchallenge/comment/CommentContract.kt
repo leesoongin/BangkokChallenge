@@ -2,24 +2,32 @@ package com.example.bangkokchallenge.comment
 
 import com.example.bangkokchallenge.base.BasePresenter
 import com.example.bangkokchallenge.base.BaseView
-import com.example.bangkokchallenge.model.CommentItem
+import com.example.bangkokchallenge.model.response.CommentResponse
 
 interface CommentContract {
     interface View:BaseView<Presenter>{
-        fun setRecyclerViewData(responseData :List<CommentItem>)
+        fun setRecyclerViewData(responseData :List<CommentResponse>) //response 받아온 comment data adapter 에 저장
+
         fun closeCommentPage()
     }
 
     interface Presenter:BasePresenter{
-        fun requestCommentDateFromServer()
+        fun requestCommentDataFromServer(token : String?,postId : Int)
+
+        fun requestSendCommentDataToServer(token : String?,comment : String?,postId : Int)
+
         fun requestCloseCommentPage()
     }
 
     interface CommentInteractor{
-        fun getCommentDate(onFinishedListener:OnFinishedListener)
+        fun getCommentData(onFinishedListener:OnFinishedListener, token : String?,postId : Int)
+
+        fun sendCommentData(onFinishedListener:OnFinishedListener, token: String?,comment:String?,postId: Int)
 
         interface OnFinishedListener{
-            fun onSuccess(noticeArrayList:List<CommentItem>)
+            fun getCommentDataSuccess(noticeArrayList:List<CommentResponse>)
+
+            fun sendCommentDataSuccess(commentResponse: CommentResponse)
         }
     }
 

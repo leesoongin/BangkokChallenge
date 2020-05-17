@@ -42,7 +42,26 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
     }
 
     override fun putLikeBySelf(position: Int, onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
-        //boolean 내려받을것
-        onFinishedListener.onLikeSuccess(position,true)
+        //token , postid필요
+        val service = ApiClient.getClient().create(ApiService::class.java)
+        val call = service.setLikeState("Bearer "+token) //
+
+        call.enqueue(object : Callback<ResponseModel<TimeLineDTO>> {
+
+            override fun onFailure(call: Call<ResponseModel<TimeLineDTO>>, t: Throwable) {
+                // onFinishedListener.onFailure(t)
+                Log.e("[TimeLineInteractor]","${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseModel<TimeLineDTO>>, response: Response<ResponseModel<TimeLineDTO>>) {
+                response.body()?.let {
+                    onFinishedListener.onTimeLineSuccess(response.body()?._embedded?.postList)
+                    Log.e("@@time",""+response.body())
+                }
+            }
+        })
+
+
+        //onFinishedListener.onLikeSuccess(position,true)
     }
 }

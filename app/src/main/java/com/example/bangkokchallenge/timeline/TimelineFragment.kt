@@ -66,9 +66,10 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     }
 //open, navigated
 
-    override fun openToCommentPage(discription:String) {
+    override fun openToCommentPage(discription:String,postId : Int?) {
         var intent = Intent(requireContext(),CommentActivity::class.java)
         intent.putExtra("discription",discription) // <- 게시물에 대한 제목?설명
+        intent.putExtra("postId",postId)
 
         startActivity(intent)
     }
