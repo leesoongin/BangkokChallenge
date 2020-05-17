@@ -5,6 +5,7 @@ import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.request.CommentRequest
 import com.example.bangkokchallenge.model.request.LoginRequest
 import com.example.bangkokchallenge.model.response.CommentResponse
+import com.example.bangkokchallenge.model.response.LikeResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 import com.example.bangkokchallenge.model.response.UploadResponse
 import okhttp3.MultipartBody
@@ -53,5 +54,11 @@ interface ApiService {
         @Body content : CommentRequest,
         @Path("post_id") postId : Int
     ):Call<CommentResponse>
+
+    @PUT("like/{post_id}")
+    fun setLikeState(
+        @Header("Authorization") token: String,
+        @Path("post_id") postId : Int
+    ):Call<LikeResponse>
 
 }

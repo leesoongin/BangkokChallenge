@@ -23,7 +23,6 @@ class TimeLinePresenter(
     }
 
     override fun onClickLike(position: Int) {
-        Log.d("@@@@ONCLICK","@@@@YEAH")
         timeLineInteractor.putLikeBySelf(position, this)
     }
 
