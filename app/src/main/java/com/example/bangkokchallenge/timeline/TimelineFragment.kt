@@ -19,6 +19,7 @@ import com.example.bangkokchallenge.data.local.PreferenceStorage
 import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.LikeResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 import kotlinx.android.synthetic.main.item_time_line.*
 
@@ -61,7 +62,6 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     }
 
     override fun setRecyclerViewData(responseData: List<TimeLineItem>?) {
-        //
         adapter.setDataList(responseData)
     }
 //open, navigated
@@ -78,7 +78,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
         Toast.makeText(requireContext(), "데이터 불러오기에 실패 했습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    override fun modifyLikeData(position: Int, boolean: Boolean) {
-       adapter.modifyLikeData(position,boolean)
+    override fun modifyLikeData(likeResponse: LikeResponse) {
+       adapter.modifyLikeData(likeResponse)
     }
 }

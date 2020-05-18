@@ -31,6 +31,7 @@ class LoginInteractorImpl :LoginContract.LoginInteractor{
 
             override fun onFailure(call: Call<AccountDTO>, t: Throwable) {
                 ///onFinishedListener.onFailure(t)
+                Log.d("@@rere",t.message)
             }
 
         })

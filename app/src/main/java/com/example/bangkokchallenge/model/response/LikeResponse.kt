@@ -1,6 +1,7 @@
 package com.example.bangkokchallenge.model.response
 
 data class LikeResponse(
+    val postId : Int, // postId
     val likeTrueAndFalse : Boolean,
     val likeCount : Int
 )

@@ -58,7 +58,7 @@ interface ApiService {
     @PUT("like/{post_id}")
     fun setLikeState(
         @Header("Authorization") token: String,
-        @Path("post_id") postId : Int
+        @Path("post_id") postId : Int?
     ):Call<LikeResponse>
 
 }

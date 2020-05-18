@@ -60,7 +60,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         sharedPreferences = SharedPreferenceStorage(this)
         interactor = LoginInteractorImpl()
         presenter = LoginPresenter(this,interactor)
-
     }
 
 

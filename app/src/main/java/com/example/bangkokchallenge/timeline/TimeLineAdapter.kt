@@ -14,9 +14,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.model.HashTag
 import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.LikeResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 import java.sql.Time
 import kotlin.coroutines.coroutineContext
@@ -31,6 +34,7 @@ import kotlin.coroutines.coroutineContext
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
     private var dataList : List<TimeLineItem>? = null
+    private lateinit var sharedPreferenceStorage : PreferenceStorage
 
     fun setDataList(dataList : List<TimeLineItem>?){
         this@TimeLineAdapter.dataList = dataList
@@ -38,9 +42,11 @@ import kotlin.coroutines.coroutineContext
         notifyDataSetChanged()
     }
 
-    fun modifyLikeData(position: Int, boolean: Boolean){
+    fun modifyLikeData(likeResponse: LikeResponse){
         dataList?.let {
-            it[position].selfLike = boolean
+            for(post in it){
+                post.selfLike = likeResponse.likeTrueAndFalse
+            }
         }
         notifyDataSetChanged()
     }
@@ -80,8 +86,9 @@ import kotlin.coroutines.coroutineContext
             }
 
             likeImage.setOnClickListener {
+                sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
 
-                listener.onClickLike(position)
+                listener.onClickLike(dataList?.get(position)?.id,sharedPreferenceStorage.userToken)
             }
             commentImage.setOnClickListener {
                 //discription 을 가지고가자
