@@ -33,12 +33,21 @@ import kotlin.coroutines.coroutineContext
     private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
-    private var dataList : List<TimeLineItem>? = null // datalist
+    private var dataList : MutableList<TimeLineItem>? = null // datalist
+   // private var dataList : List<TimeLineItem>? = null // datalist
     private lateinit var sharedPreferenceStorage : PreferenceStorage //나의 정보 꺼내오기
    // private lateinit var likeResponse : LikeResponse
     fun setDataList(dataList : List<TimeLineItem>?){
-        this@TimeLineAdapter.dataList = dataList
-
+       if(this@TimeLineAdapter.dataList.isNullOrEmpty()){
+           this@TimeLineAdapter.dataList = (dataList as MutableList<TimeLineItem>)
+       }else{
+           dataList?.let {
+               for(post in it){
+                   this@TimeLineAdapter.dataList?.add(post)
+                   Log.d("addPost",""+this@TimeLineAdapter.dataList)
+               }//for
+           }//let
+       }//else
         notifyDataSetChanged()
     }
 

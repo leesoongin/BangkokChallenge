@@ -62,6 +62,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
 
                 if (lastPosition == totalCount) {
                     Log.d("last_Post","마지막포스트입니다.")
+                    presenter.requestTimeLineDataFromServer(sharedPreferences.userToken)
                 }
             }
         })//listener

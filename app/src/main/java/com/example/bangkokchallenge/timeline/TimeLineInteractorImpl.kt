@@ -19,11 +19,15 @@ import retrofit2.Response
  */
 
 class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
+    private var pageSize : Int ?=null
+    private var pageTotlalElements : Int? = null
+    private var pageTotalpages : Int? =null
+    private var pageNumber : Int = 0
 
     override fun getTimeLineData(token : String?,onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getTimeLineItems("Bearer "+token,0) //
+        val call = service.getTimeLineItems("Bearer "+token,pageNumber) //
 
         Log.d("adad",token)
         call.enqueue(object : Callback<ResponseModel<TimeLineDTO>> {
@@ -37,6 +41,13 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
                 response.body()?.let {
 
                     onFinishedListener.onTimeLineSuccess(response.body()?._embedded?.postList)
+
+                    pageTotalpages=response.body()?.page?.totalPages
+                    if(pageTotalpages!! > pageNumber){
+                        pageNumber=response.body()?.page!!.number+1
+                    }
+
+
                     Log.e("@@time",""+response.body())
                 }
             }
