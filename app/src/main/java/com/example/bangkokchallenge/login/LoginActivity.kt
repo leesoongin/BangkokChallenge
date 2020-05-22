@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         /*  ==  Session.getCurrentSession().addCallback(sessionCallback)*/
         session.addCallback(sessionCallback)
-        session.open(AuthType.KAKAO_LOGIN_ALL, this);
+        session.open(AuthType.KAKAO_TALK, this);
     }
 
 
@@ -140,18 +140,21 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     // 세션 콜백 구현
     private val sessionCallback: ISessionCallback = object : ISessionCallback {
         override fun onSessionOpened() {
+            Log.d("Session","onSessionopen")
             UserManagement.getInstance().me(object : MeV2ResponseCallback() {
                 override fun onSuccess(result: MeV2Response) {
                     val userSessionToken = Session.getCurrentSession().tokenInfo.accessToken
-
+                    Log.d("Session","onSuccess")
                     /*로그인 성공시 유저 토큰가지고 액티비티 전환*/
                     presenter.requestAccessToken(userSessionToken)
+
 
                     if (BuildConfig.DEBUG) {
                         //toastMessage("[DEV] onSuccess() user token: $userSessionToken")
                     }
                 }//onSuccess
                 override fun onSessionClosed(errorResult: ErrorResult) {
+
                 }//closed
             })
         }//onSessionOpened
