@@ -79,8 +79,10 @@ import kotlin.coroutines.coroutineContext
                 date.text= it[position].createdAt
 
                 if(it[position].selfLike){
+                    Log.d("@likeTestT: ${position}","${it[position].selfLike}")
                     likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
                 }else{
+                    Log.d("@likeTestF: ${position}","${it[position].selfLike}")
                     likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like))
                 }
             }

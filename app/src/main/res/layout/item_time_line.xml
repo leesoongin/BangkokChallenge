@@ -54,8 +54,7 @@
     <ImageView
         android:id="@+id/item_time_line_image"
         android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:background="#dddddd"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_time_line_divider" />

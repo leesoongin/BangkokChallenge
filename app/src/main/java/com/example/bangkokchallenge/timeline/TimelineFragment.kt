@@ -2,13 +2,11 @@ package com.example.bangkokchallenge.timeline
 
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +15,8 @@ import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
 import com.example.bangkokchallenge.data.local.PreferenceStorage
 import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
-import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
 import com.example.bangkokchallenge.model.response.LikeResponse
-import com.example.bangkokchallenge.model.response.ResponseModel
-import kotlinx.android.synthetic.main.item_time_line.*
 
 
 class TimelineFragment : Fragment(), TimeLineContract.View {
@@ -53,8 +48,27 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     private fun initViews(view: View) {
         recyclerView = view.findViewById(R.id.timeline_recyclerview)
         recyclerView.layoutManager =  LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+
         adapter = TimeLineAdapter(presenter)
         recyclerView.adapter = adapter
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("last Post","들어옴. ${recyclerView.adapter!!.itemCount}")
+                val lastPosition = (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+                Log.d("lastPosition","${lastPosition}")
+                val totalCount = recyclerView.adapter!!.itemCount
+                if (lastPosition == totalCount) {
+                    Log.d("last Post","마지막포스트입니다.")
+                }
+            }
+
+        })//listener
     }
 
     private fun fetchInitData(){

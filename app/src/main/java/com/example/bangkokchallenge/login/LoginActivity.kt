@@ -152,7 +152,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                     }
                 }//onSuccess
                 override fun onSessionClosed(errorResult: ErrorResult) {
-                    // todo : 세션 응답 실패 처리
                 }//closed
             })
         }//onSessionOpened

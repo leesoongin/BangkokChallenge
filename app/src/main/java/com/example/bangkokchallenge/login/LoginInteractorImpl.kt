@@ -13,10 +13,10 @@ import retrofit2.Response
 class LoginInteractorImpl :LoginContract.LoginInteractor{
     override fun sendAccessToken(token : String,onFinishedListener: LoginContract.LoginInteractor.OnFinishedListener) {
 
-            //Log.d("@@@",token)
-
+        val to : String = "dOLTuvW4BpijA7w4DDKBoH8LGCz15RLHicWOTQo9dVoAAAFyN1jB-w"
+        Log.d("@@",token)
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.login(LoginRequest(token)) //
+        val call = service.login(LoginRequest(to)) //
 
         call.enqueue(object : Callback<AccountDTO> {
 

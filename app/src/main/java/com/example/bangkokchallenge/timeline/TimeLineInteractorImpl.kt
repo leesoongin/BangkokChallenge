@@ -23,8 +23,9 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
     override fun getTimeLineData(token : String?,onFinishedListener: TimeLineContract.TimeLineInteractor.OnFinishedListener) {
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.getTimeLineItems("Bearer "+token) //
+        val call = service.getTimeLineItems("Bearer "+token,0) //
 
+        Log.d("adad",token)
         call.enqueue(object : Callback<ResponseModel<TimeLineDTO>> {
 
             override fun onFailure(call: Call<ResponseModel<TimeLineDTO>>, t: Throwable) {
@@ -34,6 +35,7 @@ class TimeLineInteractorImpl : TimeLineContract.TimeLineInteractor{
 
             override fun onResponse(call: Call<ResponseModel<TimeLineDTO>>, response: Response<ResponseModel<TimeLineDTO>>) {
                 response.body()?.let {
+
                     onFinishedListener.onTimeLineSuccess(response.body()?._embedded?.postList)
                     Log.e("@@time",""+response.body())
                 }
