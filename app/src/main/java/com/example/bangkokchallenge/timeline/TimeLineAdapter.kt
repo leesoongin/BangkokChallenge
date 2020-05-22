@@ -33,9 +33,9 @@ import kotlin.coroutines.coroutineContext
     private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
-    private var dataList : List<TimeLineItem>? = null
-    private lateinit var sharedPreferenceStorage : PreferenceStorage
-
+    private var dataList : List<TimeLineItem>? = null // datalist
+    private lateinit var sharedPreferenceStorage : PreferenceStorage //나의 정보 꺼내오기
+   // private lateinit var likeResponse : LikeResponse
     fun setDataList(dataList : List<TimeLineItem>?){
         this@TimeLineAdapter.dataList = dataList
 
@@ -45,7 +45,7 @@ import kotlin.coroutines.coroutineContext
     fun modifyLikeData(likeResponse: LikeResponse){
         dataList?.let {
             for(post in it){
-                post.selfLike = likeResponse.likeTrueAndFalse
+                post.selfLike = likeResponse.likeState
             }
         }
         notifyDataSetChanged()
@@ -54,6 +54,7 @@ import kotlin.coroutines.coroutineContext
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.item_time_line,parent,false)
+
         return TimeLineItemViewHolder(view)
     }
 
@@ -63,7 +64,6 @@ import kotlin.coroutines.coroutineContext
 
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
 
-
         holder.apply {
             dataList?.let {
 
@@ -72,6 +72,7 @@ import kotlin.coroutines.coroutineContext
 
                 Glide.with(timeLineImage.context).load(it[position].filePath)
                     .into(timeLineImage)
+                sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
 
                 userName.text = it[position].nickname
                 discription.text = it[position].article
@@ -88,8 +89,6 @@ import kotlin.coroutines.coroutineContext
             }
 
             likeImage.setOnClickListener {
-                sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
-
                 listener.onClickLike(dataList?.get(position)?.id,sharedPreferenceStorage.userToken)
             }
             commentImage.setOnClickListener {

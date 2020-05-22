@@ -3,7 +3,7 @@ package com.example.bangkokchallenge.model.response
 data class LikeResponse(
     val postId : Int, // postId
     val accountId : String, // 좋아요 누른 사용자 kakao id
-    val likeTrueAndFalse : Boolean,
+    val likeState : Boolean,
     val likeCount : Int
 )
 /*

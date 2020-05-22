@@ -49,9 +49,6 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
         recyclerView = view.findViewById(R.id.timeline_recyclerview)
         recyclerView.layoutManager =  LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
 
-        adapter = TimeLineAdapter(presenter)
-        recyclerView.adapter = adapter
-
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -59,16 +56,18 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                Log.d("last Post","들어옴. ${recyclerView.adapter!!.itemCount}")
-                val lastPosition = (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
-                Log.d("lastPosition","${lastPosition}")
-                val totalCount = recyclerView.adapter!!.itemCount
+
+                val lastPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val totalCount = recyclerView.adapter!!.itemCount-1
+
                 if (lastPosition == totalCount) {
-                    Log.d("last Post","마지막포스트입니다.")
+                    Log.d("last_Post","마지막포스트입니다.")
                 }
             }
-
         })//listener
+
+        adapter = TimeLineAdapter(presenter)
+        recyclerView.adapter = adapter
     }
 
     private fun fetchInitData(){
