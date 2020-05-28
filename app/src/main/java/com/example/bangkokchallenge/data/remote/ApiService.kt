@@ -29,7 +29,8 @@ interface ApiService {
     /* post list */
     @GET("post")
     fun getTimeLineItems(
-        @Header("Authorization") token:String
+        @Header("Authorization") token:String,
+        @Query("page") page : Int
     ): Call<ResponseModel<TimeLineDTO>>
 
     /* post upload */
@@ -58,7 +59,19 @@ interface ApiService {
     @PUT("like/{post_id}")
     fun setLikeState(
         @Header("Authorization") token: String,
-        @Path("post_id") postId : Int
+        @Path("post_id") postId : Int?
     ):Call<LikeResponse>
 
+    @GET("post/getMyPosts")
+    fun getMyPostItem(
+        @Header("Authorization") token : String,
+        @Query("page") page : Int
+    ):Call<ResponseModel<TimeLineDTO>>
+
+    @GET("post/getMyLikes")
+    fun getLikePostItem(
+        @Header("Authorization") token : String,
+        @Query("page") page : Int
+    ):Call<ResponseModel<TimeLineDTO>>
 }
+

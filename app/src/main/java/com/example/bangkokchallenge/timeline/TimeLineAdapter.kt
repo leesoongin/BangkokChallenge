@@ -14,9 +14,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.comment.CommentActivity
+import com.example.bangkokchallenge.data.local.PreferenceStorage
+import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.model.HashTag
 import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.LikeResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 import java.sql.Time
 import kotlin.coroutines.coroutineContext
@@ -30,24 +33,40 @@ import kotlin.coroutines.coroutineContext
     private val listener : TimeLineContract.TimeLineItemClickListener // TODO : TimeLineActivity 에서 해당 인터페이스 구현후 인자로 넘겨야 함.
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
-    private var dataList : List<TimeLineItem>? = null
+    private var dataList : MutableList<TimeLineItem>? = null // datalist
+    private lateinit var sharedPreferenceStorage : PreferenceStorage //나의 정보 꺼내오기
 
     fun setDataList(dataList : List<TimeLineItem>?){
-        this@TimeLineAdapter.dataList = dataList
+       if(this@TimeLineAdapter.dataList.isNullOrEmpty()){
+           this@TimeLineAdapter.dataList = (dataList as MutableList<TimeLineItem>)
+       }else{
+           dataList?.let {
+               for(post in it){
+                   this@TimeLineAdapter.dataList?.add(post)
+                   Log.d("addPost",""+this@TimeLineAdapter.dataList)
+               }//for
+           }//let
+       }//else
 
         notifyDataSetChanged()
     }
 
-    fun modifyLikeData(position: Int, boolean: Boolean){
+    fun modifyLikeData(likeResponse: LikeResponse){
         dataList?.let {
-            it[position].selfLike = boolean
-        }
+            for(post in it){
+                if(post.id == likeResponse.postId){
+                    post.selfLike = likeResponse.likeState
+                }//if
+            }//for
+        }//let
+
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.item_time_line,parent,false)
+
         return TimeLineItemViewHolder(view)
     }
 
@@ -56,7 +75,6 @@ import kotlin.coroutines.coroutineContext
     }
 
     override fun onBindViewHolder(holder: TimeLineItemViewHolder, position: Int) {
-
 
         holder.apply {
             dataList?.let {
@@ -67,25 +85,30 @@ import kotlin.coroutines.coroutineContext
                 Glide.with(timeLineImage.context).load(it[position].filePath)
                     .into(timeLineImage)
 
+                sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
+
+                likeCount.text = "좋아요 "+it[position].likeCount+"개"
                 userName.text = it[position].nickname
                 discription.text = it[position].article
                 hashTag.text = getHashTagMessages(position) // hashTag 자료형에서 content만 뽑아냄
-                date.text= it[position].createdAt
+                commentImage.text = "댓글 보기 "+it[position].commentCount+"개"
+                //date.text= it[position].createdAt
 
                 if(it[position].selfLike){
+                    Log.d("@likeTestT: ${position}","${it[position].selfLike}")
                     likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like_pressed))
                 }else{
+                    Log.d("@likeTestF: ${position}","${it[position].selfLike}")
                     likeImage.setImageDrawable(likeImage.context.getDrawable(R.drawable.like))
                 }
             }
 
             likeImage.setOnClickListener {
-
-                listener.onClickLike(position)
+                listener.onClickLike(dataList?.get(position)?.id,sharedPreferenceStorage.userToken)
             }
             commentImage.setOnClickListener {
                 //discription 을 가지고가자
-                listener.onClickComment(discription.text.toString(),dataList?.get(position)?.id)
+                listener.onClickComment(discription.text.toString(),hashTag.text.toString(),dataList?.get(position)?.id)
             }
             moreImage.setOnClickListener {
                 Log.d("이벤트리스너","more")
@@ -102,12 +125,13 @@ import kotlin.coroutines.coroutineContext
 
         /* comment , like */
         var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)
-        var commentImage:ImageView=itemView.findViewById(R.id.item_time_line_comment_image)
+        var likeCount : TextView =itemView.findViewById(R.id.item_time_line_likeCount)
+        var commentImage:TextView=itemView.findViewById(R.id.item_time_line_comment_image)
 
         /* article date */
         var discription: TextView = itemView.findViewById(R.id.item_time_line_discription) //article
         var hashTag : TextView = itemView.findViewById(R.id.item_time_line_hash_tag) // hashtag
-        var date: TextView = itemView.findViewById(R.id.item_time_line_date)   //createAt
+       // var date: TextView = itemView.findViewById(R.id.item_time_line_date)   //createAt
 
         /* item */
 

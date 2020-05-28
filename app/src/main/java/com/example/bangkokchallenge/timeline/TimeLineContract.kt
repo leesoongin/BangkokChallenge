@@ -4,6 +4,7 @@ import com.example.bangkokchallenge.base.BasePresenter
 import com.example.bangkokchallenge.base.BaseView
 import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.LikeResponse
 import com.example.bangkokchallenge.model.response.ResponseModel
 
 /**
@@ -17,9 +18,9 @@ interface TimeLineContract {
     interface View : BaseView<Presenter> {
         fun setRecyclerViewData(responseData : List<TimeLineItem>?)
 
-        fun modifyLikeData(position:Int, boolean: Boolean)
+        fun modifyLikeData(likeResponse: LikeResponse)
 
-        fun openToCommentPage(discription: String,postId : Int?) //<- comment page로 이동
+        fun openToCommentPage(discription: String,hashTag: String,postId : Int?) //<- comment page로 이동
 
         fun onResponseFailure(t: Throwable?)
     }
@@ -34,7 +35,7 @@ interface TimeLineContract {
         /*like , comment get data*/
         fun getTimeLineData(token : String?,onFinishedListener: OnFinishedListener)
 
-        fun putLikeBySelf(position: Int, onFinishedListener: OnFinishedListener)
+        fun putLikeBySelf(postId: Int?, token : String? ,onFinishedListener: OnFinishedListener)
 
 
          interface OnFinishedListener {
@@ -42,7 +43,7 @@ interface TimeLineContract {
 
              fun onTimeLineFailure(t: Throwable?)
 
-             fun onLikeSuccess(position: Int, isLike: Boolean)
+             fun onLikeSuccess(likeResponse: LikeResponse)
 
              fun onLikeFailure(t: Throwable?)
         }
@@ -50,10 +51,10 @@ interface TimeLineContract {
 
 
     interface TimeLineItemClickListener {
-        fun onClickLike(position: Int)
+        fun onClickLike(postId: Int?,token : String?)
 
         fun onClickDescription()
 
-        fun onClickComment(discription:String,postId : Int?)
+        fun onClickComment(discription:String,hashTag : String,postId : Int?)
     }
 }

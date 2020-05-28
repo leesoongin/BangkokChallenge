@@ -76,12 +76,12 @@
 
         <Button
             android:id="@+id/posting_btn"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="26dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="게시"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="26dp"
+            android:text="게시" />
     </LinearLayout>
 
 

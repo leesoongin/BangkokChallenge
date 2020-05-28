@@ -12,9 +12,7 @@ import retrofit2.Response
 
 class LoginInteractorImpl :LoginContract.LoginInteractor{
     override fun sendAccessToken(token : String,onFinishedListener: LoginContract.LoginInteractor.OnFinishedListener) {
-
-            //Log.d("@@@",token)
-
+        Log.d("@@",token)
         val service = ApiClient.getClient().create(ApiService::class.java)
         val call = service.login(LoginRequest(token)) //
 
@@ -31,6 +29,7 @@ class LoginInteractorImpl :LoginContract.LoginInteractor{
 
             override fun onFailure(call: Call<AccountDTO>, t: Throwable) {
                 ///onFinishedListener.onFailure(t)
+                Log.d("@@rere",t.message)
             }
 
         })

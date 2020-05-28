@@ -23,11 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/item_time_line_divider"
         app:layout_constraintStart_toEndOf="@+id/item_time_line_profile_image"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#000000"
         tools:text="준영" />
 
     <ImageView
@@ -54,8 +54,7 @@
     <ImageView
         android:id="@+id/item_time_line_image"
         android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:background="#dddddd"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_time_line_divider" />
@@ -71,56 +70,68 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_time_line_image" />
 
-
-
-    <ImageView
-        android:id="@+id/item_time_line_comment_image"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="16dp"
-        android:src="@drawable/comment"
-        app:layout_constraintLeft_toRightOf="@id/item_time_line_like_image"
-        app:layout_constraintTop_toTopOf="@id/item_time_line_like_image" />
-
-
     <TextView
-        android:id="@+id/item_time_line_discription"
-        android:layout_width="0dp"
+        android:id="@+id/item_time_line_likeCount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textStyle="bold"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="좋아요 "
+        android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_like_image"
-        tools:text="안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요!" />
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_like_image" />
 
     <TextView
         android:id="@+id/item_time_line_hash_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:paddingBottom="10dp"
-        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:textColor="#043860"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_discription"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_likeCount"
         tools:text="hash_tag" />
 
+
     <TextView
-        android:id="@+id/item_time_line_date"
+        android:id="@+id/item_time_line_discription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_hash_tag"
+        tools:text="안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요! 안녕하세요 오늘은 집에서 파스타를 만들어 먹었어요!" />
+
+
+    <TextView
+        android:id="@+id/item_time_line_comment_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="10dp"
         android:paddingBottom="10dp"
+        android:text="댓글 보기"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_time_line_hash_tag"
-        tools:text="2020-04-04" />
+        app:layout_constraintTop_toBottomOf="@+id/item_time_line_discription" />
+    <!--
+
+        <TextView
+            android:id="@+id/item_time_line_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_time_line_comment_image"
+            tools:text="2020-04-04" />
+    -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

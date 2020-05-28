@@ -3,20 +3,14 @@ package com.example.bangkokchallenge.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkokchallenge.R
 import com.example.bangkokchallenge.createpost.CreatePostActivity
 import com.example.bangkokchallenge.likepost.LikePostFragment
-import com.example.bangkokchallenge.model.TimeLineDTO
-import com.example.bangkokchallenge.model.response.ResponseModel
-import com.example.bangkokchallenge.mypage.MypageViewFragment
+import com.example.bangkokchallenge.mypage.MypageFragment
 import com.example.bangkokchallenge.timeline.TimelineFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
@@ -44,7 +38,7 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
                 return true
             }
             R.id.action_user_info -> {//grid
-                var mypageViewFragment = MypageViewFragment()
+                var mypageViewFragment = MypageFragment()
 
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.main_framelayout, mypageViewFragment).commit()
