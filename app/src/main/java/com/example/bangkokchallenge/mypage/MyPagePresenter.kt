@@ -24,8 +24,8 @@ class MyPagePresenter(
        //딱히 없고
     }
 
-    override fun onClickComment(discription: String, postId: Int?) {
-        mypageView.openToCommentPage(discription,postId)
+    override fun onClickComment(discription: String,hashTag : String, postId: Int?) {
+        mypageView.openToCommentPage(discription,hashTag,postId)
     }
 
     override fun requestMyPageDataFromSever(token: String?) {

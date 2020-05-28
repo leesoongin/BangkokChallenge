@@ -32,8 +32,8 @@ class LikePostPresenter(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onClickComment(discription: String, postId: Int?) {
-        likePostView.openToCommentPage(discription,postId)
+    override fun onClickComment(discription: String,hashTag : String, postId: Int?) {
+        likePostView.openToCommentPage(discription,hashTag,postId)
     }
 
     override fun onFailure(t: Throwable?) {

@@ -27,8 +27,8 @@ class TimeLinePresenter(
         timeLineInteractor.putLikeBySelf(postId,token, this)
     }
 
-    override fun onClickComment(discription:String,postId:Int?) {
-        timeLineView.openToCommentPage(discription,postId)
+    override fun onClickComment(discription:String,hashTag : String,postId:Int?) {
+        timeLineView.openToCommentPage(discription,hashTag,postId)
     }
 
     override fun onClickDescription() {

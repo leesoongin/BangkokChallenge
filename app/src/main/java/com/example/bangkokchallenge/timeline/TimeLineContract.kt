@@ -20,7 +20,7 @@ interface TimeLineContract {
 
         fun modifyLikeData(likeResponse: LikeResponse)
 
-        fun openToCommentPage(discription: String,postId : Int?) //<- comment page로 이동
+        fun openToCommentPage(discription: String,hashTag: String,postId : Int?) //<- comment page로 이동
 
         fun onResponseFailure(t: Throwable?)
     }
@@ -55,6 +55,6 @@ interface TimeLineContract {
 
         fun onClickDescription()
 
-        fun onClickComment(discription:String,postId : Int?)
+        fun onClickComment(discription:String,hashTag : String,postId : Int?)
     }
 }

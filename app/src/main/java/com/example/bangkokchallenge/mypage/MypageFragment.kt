@@ -93,9 +93,10 @@ class MypageFragment : Fragment(), MyPageContract.View {
         adapter.modifyLikeData(likeResponse)
     }
 
-    override fun openToCommentPage(discription: String, postId: Int?) {
+    override fun openToCommentPage(discription: String,hashTag : String, postId: Int?) {
         var intent = Intent(requireContext(), CommentActivity::class.java)
         intent.putExtra("discription",discription) // <- 게시물에 대한 제목?설명
+        intent.putExtra("hashTag",hashTag)
         intent.putExtra("postId",postId)
 
         startActivity(intent)

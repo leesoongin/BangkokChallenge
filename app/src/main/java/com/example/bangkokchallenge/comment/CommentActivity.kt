@@ -24,6 +24,7 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
 
     private lateinit var recyclerView:RecyclerView
     private lateinit var discription:TextView
+    private lateinit var hashTag : TextView
     private lateinit var comment : EditText
     private lateinit var backBtn:ImageView
     private lateinit var sendBtn:Button
@@ -56,7 +57,11 @@ class CommentActivity : AppCompatActivity() ,CommentContract.View {
         recyclerView.layoutManager=LinearLayoutManager(applicationContext, RecyclerView.VERTICAL,false)
 
         discription=findViewById(R.id.comment_discription)
+        Log.e("hashTag",discription.text.toString())
         discription.text=intent.getStringExtra("discription")
+
+        hashTag = findViewById(R.id.comment_hashTag)
+        hashTag.text=intent.getStringExtra("hashTag")
 
         comment=findViewById(R.id.comment_edittext_comment) //전송할 댓글
 

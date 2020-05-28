@@ -70,6 +70,10 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
         posting_btn.setOnClickListener { //게시하기 버튼
             presenter.pressedUploadButton()
         }
+
+        back_btn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun loadImage() {

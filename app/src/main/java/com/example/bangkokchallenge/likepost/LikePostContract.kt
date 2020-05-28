@@ -10,7 +10,7 @@ interface LikePostContract  {
     interface View:BaseView<Presenter>{
         fun setRecyclerViewData(responseData:List<TimeLineItem>?)
 
-        fun openToCommentPage(discription: String,postId : Int?) //<- comment page로 이동
+        fun openToCommentPage(discription: String,hashTag : String,postId : Int?) //<- comment page로 이동
 
         fun modifyLikeData(likeResponse: LikeResponse)
     }
@@ -37,7 +37,7 @@ interface LikePostContract  {
 
         fun onClickDescription()
 
-        fun onClickComment(discription:String,postId : Int?)
+        fun onClickComment(discription:String,hashTag : String,postId : Int?)
     }
 
 }
