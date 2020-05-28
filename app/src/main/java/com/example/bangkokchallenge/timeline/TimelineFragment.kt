@@ -28,12 +28,8 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
     private lateinit var recyclerView: RecyclerView
     private lateinit var sharedPreferences: PreferenceStorage
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view =
-            LayoutInflater.from(activity).inflate(R.layout.fragment_timeline, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = LayoutInflater.from(activity).inflate(R.layout.fragment_timeline, container, false)
 
         sharedPreferences=SharedPreferenceStorage(requireContext())
         interactor = TimeLineInteractorImpl()

@@ -62,4 +62,9 @@ interface ApiService {
         @Path("post_id") postId : Int?
     ):Call<LikeResponse>
 
+    @GET("post/getMyPosts")
+    fun getMyPostItem(
+        @Header("Authorization") token : String,
+        @Query("page") page : Int
+    ):Call<ResponseModel<TimeLineDTO>>
 }
