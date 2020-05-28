@@ -60,6 +60,7 @@ class TimelineFragment : Fragment(), TimeLineContract.View {
                 val lastPosition = (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                 val totalCount = recyclerView.adapter!!.itemCount-1
 
+                Log.d("last",""+lastPosition)
                 if (lastPosition == totalCount) {
                     Log.d("last_Post","마지막포스트입니다.")
                     presenter.requestTimeLineDataFromServer(sharedPreferences.userToken)

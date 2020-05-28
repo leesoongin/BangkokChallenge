@@ -1,16 +1,43 @@
 package com.example.bangkokchallenge.mypage
 
+import android.util.Log
+import com.example.bangkokchallenge.data.remote.ApiClient
+import com.example.bangkokchallenge.data.remote.ApiService
+import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
+import com.example.bangkokchallenge.model.response.ResponseModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyPageInteractorImpl : MyPageContract.MyPageInteractor{
-    override fun getMyPageData(onFinishedListener: MyPageContract.MyPageInteractor.OnFinishedListener) {
-        /* 서버에서 받아와 dataList에 담기*/
+    override fun getMyPageData(token : String,onFinishedListener: MyPageContract.MyPageInteractor.OnFinishedListener) {
+      /*  val service = ApiClient.getClient().create(ApiService::class.java)
+        val call = service.getTimeLineItems("Bearer "+token) //
 
-        onFinishedListener.onSuccess(arrayListOf(
-           /* TimeLineItem("1","lee","imageUri","안녕 1번이야","2020-04-21","2020",1,false,1),
-            TimeLineItem("2","park","imageUri","안녕 2번이야","2020-04-21","2020",1,false,2),
-            TimeLineItem("3","kim","imageUri","안녕 3번이야","2020-04-21","2020",1,false,3)*/
-        ))
+        Log.d("adad",token)
+        call.enqueue(object : Callback<ResponseModel<TimeLineDTO>> {
+
+            override fun onFailure(call: Call<ResponseModel<TimeLineDTO>>, t: Throwable) {
+                // onFinishedListener.onFailure(t)
+                Log.e("[TimeLineInteractor]","${t.message}")
+            }
+
+            override fun onResponse(call: Call<ResponseModel<TimeLineDTO>>, response: Response<ResponseModel<TimeLineDTO>>) {
+                response.body()?.let {
+
+                    onFinishedListener.onSuccess(response.body()?._embedded?.postList)
+
+                    pageTotalpages=response.body()?.page?.totalPages
+                    if(pageTotalpages!! > pageNumber){
+                        pageNumber=response.body()?.page!!.number+1
+                    }
+
+
+                    Log.e("@@time",""+response.body())
+                }
+            }
+        })*/
     }
 
 

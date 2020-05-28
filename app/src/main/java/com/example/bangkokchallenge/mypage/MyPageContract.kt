@@ -19,7 +19,7 @@ interface MyPageContract {
     }
 
     interface MyPageInteractor{ // presenter에서 데이터 전송 요청시  받아오기
-        fun getMyPageData(onFinishedListener: OnFinishedListener)
+        fun getMyPageData(token : String,onFinishedListener: OnFinishedListener)
 
         interface OnFinishedListener{
             fun onSuccess(noticeArrayList:List<TimeLineItem>) //

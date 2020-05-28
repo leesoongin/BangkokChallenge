@@ -16,7 +16,7 @@ class MyPagePresenter(
     }
 
     override fun requestMyPageDataFromSever() {
-        mypageInteractor.getMyPageData(this) //this -> MyPagePresenter
+        //mypageInteractor.getMyPageData(this) //this -> MyPagePresenter
     }
 
     override fun onSuccess(noticeArrayList: List<TimeLineItem>) {

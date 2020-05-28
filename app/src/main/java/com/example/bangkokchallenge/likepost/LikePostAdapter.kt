@@ -27,13 +27,13 @@ class LikePostAdapter(
         holder.apply {
             userName.text=dataList[position].nickname
             discription.text=dataList[position].article
-            date.text=dataList[position].createdAt // dateTime
+          //  date.text=dataList[position].createdAt // dateTime
         }
     }
 
     class LikePostItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var userName : TextView =view . findViewById(R.id.item_time_line_username)
         var discription :TextView = view.findViewById(R.id.item_time_line_discription)
-        var date:TextView =view .findViewById(R.id.item_time_line_date)
+       // var date:TextView =view .findViewById(R.id.item_time_line_date)
     }
 }

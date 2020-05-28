@@ -2,7 +2,7 @@
     <string name="app_name">BangkokChallenge</string>
 
     <!--카카오 네이티브 앱 키-->
-    <string name="kakao_native_app_key">a93dc68eeb980c6938f45579465967b9</string>
+    <string name="kakao_native_app_key">34bc82042acf6cc7f78cc71ce2b71619</string>
 
     <!--Bottom Navigation Item-->
     <string name="home">Home</string>

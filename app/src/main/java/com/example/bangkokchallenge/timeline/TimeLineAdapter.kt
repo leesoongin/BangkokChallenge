@@ -34,9 +34,8 @@ import kotlin.coroutines.coroutineContext
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
     private var dataList : MutableList<TimeLineItem>? = null // datalist
-   // private var dataList : List<TimeLineItem>? = null // datalist
     private lateinit var sharedPreferenceStorage : PreferenceStorage //나의 정보 꺼내오기
-   // private lateinit var likeResponse : LikeResponse
+
     fun setDataList(dataList : List<TimeLineItem>?){
        if(this@TimeLineAdapter.dataList.isNullOrEmpty()){
            this@TimeLineAdapter.dataList = (dataList as MutableList<TimeLineItem>)
@@ -48,15 +47,19 @@ import kotlin.coroutines.coroutineContext
                }//for
            }//let
        }//else
+
         notifyDataSetChanged()
     }
 
     fun modifyLikeData(likeResponse: LikeResponse){
         dataList?.let {
             for(post in it){
-                post.selfLike = likeResponse.likeState
-            }
-        }
+                if(post.id == likeResponse.postId){
+                    post.selfLike = likeResponse.likeState
+                }//if
+            }//for
+        }//let
+
         notifyDataSetChanged()
     }
 
@@ -81,12 +84,15 @@ import kotlin.coroutines.coroutineContext
 
                 Glide.with(timeLineImage.context).load(it[position].filePath)
                     .into(timeLineImage)
+
                 sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
 
+                likeCount.text = "좋아요 "+it[position].likeCount+"개"
                 userName.text = it[position].nickname
                 discription.text = it[position].article
                 hashTag.text = getHashTagMessages(position) // hashTag 자료형에서 content만 뽑아냄
-                date.text= it[position].createdAt
+                commentImage.text = "댓글 보기 "+it[position].commentCount+"개"
+                //date.text= it[position].createdAt
 
                 if(it[position].selfLike){
                     Log.d("@likeTestT: ${position}","${it[position].selfLike}")
@@ -119,12 +125,13 @@ import kotlin.coroutines.coroutineContext
 
         /* comment , like */
         var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)
-        var commentImage:ImageView=itemView.findViewById(R.id.item_time_line_comment_image)
+        var likeCount : TextView =itemView.findViewById(R.id.item_time_line_likeCount)
+        var commentImage:TextView=itemView.findViewById(R.id.item_time_line_comment_image)
 
         /* article date */
         var discription: TextView = itemView.findViewById(R.id.item_time_line_discription) //article
         var hashTag : TextView = itemView.findViewById(R.id.item_time_line_hash_tag) // hashtag
-        var date: TextView = itemView.findViewById(R.id.item_time_line_date)   //createAt
+       // var date: TextView = itemView.findViewById(R.id.item_time_line_date)   //createAt
 
         /* item */
 
