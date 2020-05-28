@@ -67,4 +67,11 @@ interface ApiService {
         @Header("Authorization") token : String,
         @Query("page") page : Int
     ):Call<ResponseModel<TimeLineDTO>>
+
+    @GET("post/getMyLikes")
+    fun getLikePostItem(
+        @Header("Authorization") token : String,
+        @Query("page") page : Int
+    ):Call<ResponseModel<TimeLineDTO>>
 }
+
