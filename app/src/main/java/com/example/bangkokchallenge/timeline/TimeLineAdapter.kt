@@ -1,28 +1,22 @@
 package com.example.bangkokchallenge.timeline
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.bangkokchallenge.R
-import com.example.bangkokchallenge.comment.CommentActivity
 import com.example.bangkokchallenge.data.local.PreferenceStorage
 import com.example.bangkokchallenge.data.local.SharedPreferenceStorage
 import com.example.bangkokchallenge.model.HashTag
-import com.example.bangkokchallenge.model.TimeLineDTO
 import com.example.bangkokchallenge.model.TimeLineItem
 import com.example.bangkokchallenge.model.response.LikeResponse
-import com.example.bangkokchallenge.model.response.ResponseModel
-import java.sql.Time
-import kotlin.coroutines.coroutineContext
 
 
 /**
@@ -34,6 +28,7 @@ import kotlin.coroutines.coroutineContext
 ) : RecyclerView.Adapter<TimeLineAdapter.TimeLineItemViewHolder>(){
 
     private var dataList : MutableList<TimeLineItem>? = null // datalist
+    private var parentContext : Context? = null
     private lateinit var sharedPreferenceStorage : PreferenceStorage //나의 정보 꺼내오기
 
     fun setDataList(dataList : List<TimeLineItem>?){
@@ -67,6 +62,8 @@ import kotlin.coroutines.coroutineContext
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.item_time_line,parent,false)
 
+        parentContext = parent.context // context 여러곳에서 사용할 수 있게 저장
+
         return TimeLineItemViewHolder(view)
     }
 
@@ -78,12 +75,18 @@ import kotlin.coroutines.coroutineContext
 
         holder.apply {
             dataList?.let {
+            //filepath가 그냥 문자열로 넘어온다.
+                /*일단 임시로 첫째 사진만 넣고 snapshot해결한 다음 시작하는게 맞는거같다.*/
+                val fileList = it[position].filePath?.split(",")
+
+                timeLineRecyclerView.adapter = TimeLinePostImageAdapter(fileList)
+                timeLineRecyclerView.layoutManager = LinearLayoutManager(parentContext, RecyclerView.HORIZONTAL, false)
+
 
                 Glide.with(profileImage.context).load(it[position].profile_photo).apply(RequestOptions().circleCrop()).override(300,500)
                     .into(profileImage)
 
-                Glide.with(timeLineImage.context).load(it[position].filePath)
-                    .into(timeLineImage)
+             //   Glide.with(timeLineImage.context).load(fileList?.get(0)).into(timeLineImage)
 
                 sharedPreferenceStorage = SharedPreferenceStorage (likeImage.context) //user token 넣기 위함 .. 이건 좋지 못하다 interface 만드는게 좋을거같은데 나중에  생각해보자 ..
 
@@ -121,7 +124,8 @@ import kotlin.coroutines.coroutineContext
 
         var userName: TextView = itemView.findViewById(R.id.item_time_line_username)
         var profileImage :ImageView = itemView.findViewById(R.id.item_time_line_profile_image) //프로필 이미지
-        var timeLineImage : ImageView = itemView.findViewById(R.id.item_time_line_image) //게시물 이미지
+      //  var timeLineImage : ImageView = itemView.findViewById(R.id.item_time_line_image) //게시물 이미지 <- recyclerview 로 전환할 예정
+        var timeLineRecyclerView : RecyclerView = itemView.findViewById(R.id.item_time_line_recyclerView)
 
         /* comment , like */
         var likeImage: ImageView =itemView.findViewById(R.id.item_time_line_like_image)

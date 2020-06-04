@@ -42,7 +42,7 @@ class CreatePostInteractorImpl : CreatePostContract.CreatePostInteractor{
         Log.d("@@hashTag","${hashTag.toString()}")
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.uploadPost("Bearer "+createPostDTO.token,article,hashTag,MultipartBody.Part.createFormData("file",file.name,surveyBody)) //
+        val call = service.uploadPost("Bearer "+createPostDTO.token,article,hashTag,MultipartBody.Part.createFormData("fileList",file.name,surveyBody)) //
 
         call.enqueue(object : Callback<UploadResponse> {
 

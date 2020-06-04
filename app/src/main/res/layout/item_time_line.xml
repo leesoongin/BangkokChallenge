@@ -51,13 +51,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <!-- 여기에 recyclerview 넣자 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_time_line_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_divider"/>
+   <!-- <ImageView
         android:id="@+id/item_time_line_image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_divider" />
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_divider" />-->
 
 
     <ImageView
@@ -68,7 +77,7 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/like"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_time_line_image" />
+        app:layout_constraintTop_toBottomOf="@id/item_time_line_recyclerView" />
 
     <TextView
         android:id="@+id/item_time_line_likeCount"
