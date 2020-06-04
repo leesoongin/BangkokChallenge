@@ -54,7 +54,7 @@ class CreatePostActivity : AppCompatActivity() ,CreatePostContract.View{
         post_discription_text = post_discription.text.toString()
         post_hashTag_text=post_hash_tag.text.toString()
         createPostDTO = CreatePostDTO(sharedPreference.userToken,selectedUriList,post_discription_text,post_hashTag_text)
-
+        Log.d("@@@path","${selectedUriList}")
         presenter.requestUploadPost(createPostDTO)
     }
 

@@ -26,15 +26,30 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import java.lang.Exception
+/*
+var images = ArrayList<MultipartBody.Part>()
+for (index in 0..data.photoList.size - 1) {
+    val file = File(data.photoList[index])
+    val surveyBody = RequestBody.create(MediaType.parse("image/*"), file)
+    images.add(MultipartBody.Part.createFormData("itemphoto", file.name, surveyBody))
+}
 
+val price = RequestBody.create(MediaType.parse("text/plain"), data.price.toString())
+val itemName = RequestBody.create(MediaType.parse("text/plain"), data.itemName)
+*/
+ */
 
 class CreatePostInteractorImpl : CreatePostContract.CreatePostInteractor{
 
     override fun sendPost(onFinishedListener: CreatePostContract.CreatePostInteractor.OnFinishedListener,createPostDTO: CreatePostDTO) {
+        var images =  ArrayList<MultipartBody.Part>()
 
-        val file = File(createPostDTO.uriList?.get(0)?.path)
-        Log.d("@@file","${file}")
-        val surveyBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        for(index in 0..createPostDTO.uriList?.size!!-1){
+            val file = File(createPostDTO.uriList?.get(index)?.path)
+            val surveyBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+
+            images.add(MultipartBody.Part.createFormData("fileList", file.name, surveyBody))
+        }
 
         val article = RequestBody.create("text/plain".toMediaTypeOrNull(),createPostDTO.article.toString())
         val hashTag = RequestBody.create("text/plain".toMediaTypeOrNull(),createPostDTO.hashTag.toString())
@@ -42,7 +57,7 @@ class CreatePostInteractorImpl : CreatePostContract.CreatePostInteractor{
         Log.d("@@hashTag","${hashTag.toString()}")
 
         val service = ApiClient.getClient().create(ApiService::class.java)
-        val call = service.uploadPost("Bearer "+createPostDTO.token,article,hashTag,MultipartBody.Part.createFormData("fileList",file.name,surveyBody)) //
+        val call = service.uploadPost("Bearer "+createPostDTO.token,article,hashTag,images) //
 
         call.enqueue(object : Callback<UploadResponse> {
 

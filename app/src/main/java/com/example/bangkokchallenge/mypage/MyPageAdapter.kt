@@ -26,7 +26,7 @@ class MyPageAdapter(
 
     fun setDataList(dataList : List<TimeLineItem>?){
         if(this@MyPageAdapter.dataList.isNullOrEmpty()){
-            this@MyPageAdapter.dataList = (dataList as MutableList<TimeLineItem>)
+            this@MyPageAdapter.dataList= null
         }else{
             dataList?.let {
                 for(post in it){
@@ -125,7 +125,7 @@ class MyPageAdapter(
     fun getHashTagMessages(position:Int) : String{ //hashTag 에서 content만 뽑기
         var hashTagMessages =""
 
-        for(message : HashTag in dataList?.get(position)?.hashTag!!){ // hashTag 자료형에서 content만 뽑자
+        for(message : HashTag in dataList?.get(position)?.hashTags!!){ // hashTag 자료형에서 content만 뽑자
             hashTagMessages+=message.content+" "
         }
 

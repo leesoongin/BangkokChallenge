@@ -18,7 +18,7 @@ data class TimeLineItem( //임시 모델.
     var article : String?, //내용
     var createdAt : String?, // 생성날짜
     var modifiedAt : String?,
-    var hashTag : List<HashTag>?,
+    var hashTags : List<HashTag>?,
     var likeCount : Int?, //좋아요개수
     var selfLike : Boolean, //좋아요 여부
     var commentCount: Int?// 댓글개수

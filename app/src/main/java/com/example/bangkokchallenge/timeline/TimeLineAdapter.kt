@@ -145,7 +145,8 @@ import com.example.bangkokchallenge.model.response.LikeResponse
     fun getHashTagMessages(position:Int) : String{ //hashTag 에서 content만 뽑기
         var hashTagMessages =""
 
-        for(message : HashTag in dataList?.get(position)?.hashTag!!){ // hashTag 자료형에서 content만 뽑자
+        for(message : HashTag in dataList?.get(position)?.hashTags!!){ // hashTag 자료형에서 content만 뽑자
+            Log.e("hashTag","${message}")
             hashTagMessages+=message.content+" "
         }
 

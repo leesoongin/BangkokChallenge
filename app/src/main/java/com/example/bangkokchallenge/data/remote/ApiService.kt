@@ -40,7 +40,7 @@ interface ApiService {
         @Header("Authorization") token: String, //bearer :
         @Part("article") article: RequestBody,
         @Part("hashTag") hashTag: RequestBody,
-        @Part name: MultipartBody.Part
+        @Part name: ArrayList<MultipartBody.Part>
     ): Call<UploadResponse>
 
     @GET("post/{post_id}/comment")
