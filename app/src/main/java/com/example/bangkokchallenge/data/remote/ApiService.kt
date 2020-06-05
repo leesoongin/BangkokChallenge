@@ -31,8 +31,14 @@ interface ApiService {
     fun getTimeLineItems(
         @Header("Authorization") token:String,
         @Query("page") page : Int
-    ): Call<ResponseModel<TimeLineDTO>>
 
+    ): Call<ResponseModel<TimeLineDTO>>
+    /* post list */
+    @GET("post")
+    fun getTimeLineItems(
+        @Header("Authorization") token:String,
+        @Query("hashTag") hashTag : String
+    ): Call<ResponseModel<TimeLineDTO>>
     /* post upload */
     @Multipart
     @POST("post/upload")

@@ -25,14 +25,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField('String','SERVER_URL',keystoreProperties.getProperty("serverURL"))
-            buildConfigField('String','NATIVE_APP_KEY',keystoreProperties.getProperty("nativeAppKey"))
+            buildConfigField('String', 'SERVER_URL', keystoreProperties.getProperty("serverURL"))
+            buildConfigField('String', 'NATIVE_APP_KEY', keystoreProperties.getProperty("nativeAppKey"))
         }
-        debug{
+        debug {
             minifyEnabled false
             debuggable true
-            buildConfigField('String','SERVER_URL',keystoreProperties.getProperty("serverURL"))
-            buildConfigField('String','NATIVE_APP_KEY',keystoreProperties.getProperty("nativeAppKey"))
+            buildConfigField('String', 'SERVER_URL', keystoreProperties.getProperty("serverURL"))
+            buildConfigField('String', 'NATIVE_APP_KEY', keystoreProperties.getProperty("nativeAppKey"))
         }
     }
 
@@ -75,7 +75,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-
 
 
     //coroutine

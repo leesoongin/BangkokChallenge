@@ -8,7 +8,7 @@
        >
         <!-- 툴바 -->
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
+            android:id="@+id/createpost_toolbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
            >
