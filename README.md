@@ -6,9 +6,9 @@
 
 - 프로젝트 소개
 - Skills
+- Contributions
 - 세부 구현
 - 상세 화면
-- Contributions
 - 어려웠던 기능, 기능 구현을 위한 고민
     
 ---
