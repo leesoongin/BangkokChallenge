@@ -82,7 +82,7 @@
 >
 # 상세화면
 
-<p><img src="https://user-images.githubusercontent.com/55231029/130121640-767f8819-80cf-4ce6-b8e8-17c31e458e4e.png" width="700" height="700"><img width="686" alt="스크린샷 2021-08-20 오전 3 16 06" src="https://user-images.githubusercontent.com/55231029/130122673-fc554f29-2388-472a-bc64-2ac3b3186a9a.png">
+<p><img src="https://user-images.githubusercontent.com/55231029/130121640-767f8819-80cf-4ce6-b8e8-17c31e458e4e.png" width="400" height="400"><img width="400" height="400" alt="스크린샷 2021-08-20 오전 3 16 06" src="https://user-images.githubusercontent.com/55231029/130122673-fc554f29-2388-472a-bc64-2ac3b3186a9a.png">
 </p>
 
 <br>
